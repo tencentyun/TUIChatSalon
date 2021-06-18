@@ -1,18 +1,5 @@
 # 语音沙龙
 
-## 效果演示
-
-<table>
-     <tr>
-         <th>房主麦位操作</th>  
-         <th>听众麦位操作</th>  
-     </tr>
-<tr>
-<td><img src="https://liteav.sdk.qcloud.com/doc/res/trtc/picture/chatsalon_anchor.gif"/ style="max-height:700px;"></td>
-<td><img src="https://liteav.sdk.qcloud.com/doc/res/trtc/picture/chatsalon_audicence.gif"/  style="max-height:700px;"></td>
-</tr>
-</table>
-
 ## 应用地址
 
 ### iOS

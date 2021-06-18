@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="trtcchatsalon_text_size_middle">14sp</dimen>
+    <dimen name="trtcchatsalon_margin_left">20dp</dimen>
+</resources>
