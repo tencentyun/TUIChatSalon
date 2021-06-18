@@ -1,0 +1,64 @@
+/* 
+ ChatSalonLocalized.strings
+ TRTCChatSalon
+
+  Created by adams on 2021/5/13.
+  
+*/
+
+"Demo.TRTC.Salon.welcome" = "欢迎";
+"Demo.TRTC.Salon.dismiss" = "忽略";
+"Demo.TRTC.Salon.appliestobecomeaspeaker" = "申请成为主播";
+"Demo.TRTC.LiveRoom.accept" = "接受";
+"Demo.TRTC.Salon.roomid" = "房间号";
+"Demo.TRTC.Salon.surewanttoleaveroom" = "确认离开房间吗";
+"Demo.TRTC.Salon.audienceconfirm" = "确认";
+"Demo.TRTC.Salon.waitabit" = "再等等";
+"Demo.TRTC.Salon.micmuted" = "已关闭麦克风";
+"Demo.TRTC.Salon.micunmuted" = "已打开麦克风";
+"Demo.TRTC.Salon.seatlistnotinit" = "麦位列表还未初始化哦！";
+"Demo.TRTC.Salon.enterroomsuccess" = "进房成功";
+"Demo.TRTC.Salon.enterroomfailed" = "进房失败";
+"Demo.TRTC.LiveRoom.createroomfailed" = "创建房间失败";
+"Demo.TRTC.Salon.isbeingarchon" = "已经是上麦主播了";
+"Demo.TRTC.Salon.roomnotready" = "房间还没有准备好";
+"Demo.TRTC.Salon.waitinghostconsent" = "正在等待房主同意";
+"Demo.TRTC.Salon.failedsenthandupmessage" = "举手信息发送失败：";
+"Demo.TRTC.Salon.hostoccupyseatsuccess" = "房主占座成功";
+"Demo.TRTC.Salon.hostoccupyseatfailed" = "房主占座失败";
+"Demo.TRTC.LiveRoom.onlyanchorcanoperation" = "只有主播才能操作";
+"Demo.TRTC.Salon.movetotheaudience" = "要求下麦";
+"Demo.TRTC.Salon.reqisexpired" = "该请求已过期";
+"Demo.TRTC.Salon.acceptreqfailed" = "接受请求失败";
+"Demo.TRTC.Salon.audiencesuccess" = "下麦成功";
+"Demo.TRTC.Salon.failedaudience" = "下麦失败：";
+"Demo.TRTC.Salon.archonclosedroom" = "房主已解散房间";
+"Demo.TRTC.Salon.handsup" = "请求上麦";
+"Demo.TRTC.Salon.audience" = "下麦";
+"Demo.TRTC.Salon.successbecomespaker" = "上麦成功";
+"Demo.TRTC.Salon.failedbecomespaker" = "上麦失败";
+"Demo.TRTC.Salon.invitelimited" = "请求正在处理，请稍后再试";
+"Demo.TRTC.Salon.raisedhandandwaitmanageraccept" = "举手成功！等待管理员通过~";
+"Demo.TRTC.Salon.createsalonroom" = "创建语音沙龙";
+"Demo.TRTC.Salon.topic" = "主题";
+"Demo.TRTC.Salon.defaultroomtopic" = "默认房间名称";
+"Demo.TRTC.Salon.userid" = "用户名";
+"Demo.TRTC.Salon.defaultuserid" = "默认用户名";
+"Demo.TRTC.Salon.letsgo" = "开始交谈";
+"Demo.TRTC.Salon.nicknameorusernameisempty" = "昵称或用户名为空";
+"Demo.TRTC.Salon.xxsroom" = " 的沙龙 ";
+"Demo.TRTC.Salon.raisedhands" = "举手列表";
+"Demo.TRTC.Salon.close" = "关闭";
+"Demo.TRTC.Salon.userisspeaker" = "该用户已经是上麦主播了";
+"Demo.TRTC.Salon.anchor" = "主播";
+"Demo.TRTC.Salon.audiences" = "听众";
+"Demo.TRTC.Salon.leavequietly" = "安静离开~";
+"Demo.TRTC.LiveRoom.confirm" = "确定";
+"Demo.TRTC.LiveRoom.cancel" = "取消";
+"Demo.TRTC.Salon.wanttoendroom" = "离开会解散房间，确定离开吗？";
+"Demo.TRTC.Salon.seatmuted" = "被房主禁言";
+"Demo.TRTC.Salon.seatunmuted" = "被房主解禁";
+"Demo.TRTC.Salon.pleaseselect" = "请选择";
+"Demo.TRTC.Buy.chatroom" = "您当前使用的云通讯账号未开通音视频聊天室功能，创建聊天室数量超过限额，请前往腾讯云官网开通【IM音视频聊天室】，地址：xxx";
+"Demo.TRTC.Buy.grouplimit" = "单个用户可创建和加入的群组数量超过了限制，请购买相关套餐,价格地址：xxx";
+"Demo.TRTC.Buy.groupmemberlimit" = "群成员数量超过限制，请参考，请购买相关套餐，价格地址：xxx";
