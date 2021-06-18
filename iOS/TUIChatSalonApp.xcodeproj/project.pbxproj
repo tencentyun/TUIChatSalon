@@ -118,7 +118,6 @@
 			children = (
 				E066A0DA1CCD59F0A7AA8346 /* LoginLocalized.strings */,
 			);
-			name = en.lproj;
 			path = en.lproj;
 			sourceTree = "<group>";
 		};
@@ -257,7 +256,6 @@
 			children = (
 				ED2F96AEC67815087533349B /* LoginLocalized.strings */,
 			);
-			name = "zh-Hans.lproj";
 			path = "zh-Hans.lproj";
 			sourceTree = "<group>";
 		};
@@ -689,7 +687,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = abyWildcardDev;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -773,7 +771,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = abyWildcardDev;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
