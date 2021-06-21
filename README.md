@@ -8,8 +8,8 @@
          <th>听众麦位操作</th>  
      </tr>
 <tr>
-<td><img src="chatsalon_anchor.gif"/ style="max-height:700px;"></td>
-<td><img src="chatsalon_audicence.gif"/  style="max-height:700px;"></td>
+<td><img src="chatsalon_anchor.gif" width="300px" height="640px"></td>
+<td><img src="chatsalon_audicence.gif" width="300px" height="640px"></td>
 </tr>
 </table>
 
