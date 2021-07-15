@@ -3,6 +3,7 @@
     <string name="trtcchatsalon_numer_format">%d watching</string>
     <string name="trtcchatsalon_agree">agree</string>
     <string name="trtcchatsalon_warning_not_empty">"input can't be empty!"</string>
+    <string name="trtcchatsalon_warning_room_name_too_long">Room name is too long</string>
     <string name="trtcchatsalon_send">send</string>
     <string name="trtcchatsalon_main_title">%1s(%2d)</string>
     <string name="trtcchatsalon_request_expired">The request has expired</string>

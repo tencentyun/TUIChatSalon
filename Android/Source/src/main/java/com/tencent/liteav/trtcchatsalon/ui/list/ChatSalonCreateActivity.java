@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.blankj.utilcode.util.ToastUtils;
 import com.tencent.liteav.login.model.ProfileManager;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.ui.utils.StatusBarUtils;
@@ -23,7 +24,7 @@ public class ChatSalonCreateActivity extends AppCompatActivity {
     private Toolbar      mToolbar;
     private EditText     mRoomNameEt;
     private TextView     mEnterTv;
-
+    private int          MAX_LEN = 30;
 
     private TextWatcher mEditTextWatcher = new TextWatcher() {
         @Override
@@ -67,7 +68,6 @@ public class ChatSalonCreateActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createRoom();
-                finish();
             }
         });
         initThemeAndNickname();
@@ -86,7 +86,12 @@ public class ChatSalonCreateActivity extends AppCompatActivity {
         String userAvatar  = ProfileManager.getInstance().getUserModel().userAvatar;
         String coverAvatar = ProfileManager.getInstance().getUserModel().userAvatar;
         String userName = ProfileManager.getInstance().getUserModel().userName;
+        if (roomName.getBytes().length > MAX_LEN) {
+            ToastUtils.showLong(getText(R.string.trtcchatsalon_warning_room_name_too_long));
+            return;
+        }
         ChatSalonAnchorActivity.createRoom(this, roomName, userId, userName, userAvatar, coverAvatar, TRTCCloudDef.TRTC_AUDIO_QUALITY_DEFAULT, true);
+        finish();
     }
 
     private void initView() {

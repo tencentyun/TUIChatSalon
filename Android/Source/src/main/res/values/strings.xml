@@ -3,6 +3,7 @@
     <string name="trtcchatsalon_numer_format">%d人在看</string>
     <string name="trtcchatsalon_agree">同意</string>
     <string name="trtcchatsalon_warning_not_empty">"输入不能为空!"</string>
+    <string name="trtcchatsalon_warning_room_name_too_long">房间名称过长</string>
     <string name="trtcchatsalon_send">发送</string>
     <string name="trtcchatsalon_main_title">%1s(%2d)</string>
     <string name="trtcchatsalon_request_expired">该请求已过期</string>

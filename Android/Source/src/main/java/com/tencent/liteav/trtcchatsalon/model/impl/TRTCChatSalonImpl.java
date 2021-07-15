@@ -301,7 +301,6 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
                 });
 
                 TRTCLogger.i(TAG, "start destroy room service.");
-                setChatSalonType(false);
                 TXRoomService.getInstance().destroyRoom(new TXCallback() {
                     @Override
                     public void onCallback(final int code, final String msg) {
@@ -941,7 +940,6 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
     private void enterTRTCRoomInner(final String roomId, final String userId, final String userSig, final int role, final TRTCChatSalonCallback.ActionCallback callback) {
         // 进入 TRTC 房间
         TRTCLogger.i(TAG, "enter trtc room.");
-        setChatSalonType(true);
         ChatSalonTRTCService.getInstance().enterRoom(mSdkAppId, roomId, userId, userSig, role, new TXCallback() {
             @Override
             public void onCallback(final int code, final String msg) {
@@ -956,18 +954,6 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
                 });
             }
         });
-    }
-
-    /**
-     * 标志用户已经进入语音沙龙
-     * @param updateType true：进入语音沙龙；false：退出语音沙龙
-     */
-    private void setChatSalonType(boolean updateType) {
-        if(updateType) {
-            ProfileManager.getInstance().getUserModel().userType = UserModel.UserType.CHATSALONTYPE;
-        } else {
-            ProfileManager.getInstance().getUserModel().userType = UserModel.UserType.NONE;
-        }
     }
 
     @Override

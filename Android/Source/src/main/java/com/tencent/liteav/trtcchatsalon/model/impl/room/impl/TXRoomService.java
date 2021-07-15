@@ -4,6 +4,7 @@ import android.content.Context;
 import android.text.TextUtils;
 import android.util.Pair;
 
+import com.google.gson.Gson;
 import com.tencent.imsdk.v2.V2TIMCallback;
 import com.tencent.imsdk.v2.V2TIMGroupInfo;
 import com.tencent.imsdk.v2.V2TIMGroupInfoResult;
@@ -23,7 +24,6 @@ import com.tencent.imsdk.v2.V2TIMValueCallback;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.model.impl.base.TRTCLogger;
 import com.tencent.liteav.trtcchatsalon.model.impl.base.TXCallback;
-import com.tencent.liteav.trtcchatsalon.model.impl.base.TXInviteData;
 import com.tencent.liteav.trtcchatsalon.model.impl.base.TXRoomInfo;
 import com.tencent.liteav.trtcchatsalon.model.impl.base.TXRoomInfoListCallback;
 import com.tencent.liteav.trtcchatsalon.model.impl.base.TXUserInfo;
@@ -41,7 +41,7 @@ import java.util.Map;
 public class TXRoomService extends V2TIMSDKListener {
     private static final String TAG = "TXRoomService";
 
-    private static final int CODE_ERROR = -1;
+    private static final int CODE_ERROR              = -1;
     private static final int MAX_INVITATION_TIME_OUT = 20; //邀请超时时间10s
 
     private static TXRoomService          sInstance;
@@ -143,6 +143,7 @@ public class TXRoomService extends V2TIMSDKListener {
     private void initIMListener() {
         V2TIMManager.getInstance().setGroupListener(mGroupListener);
         V2TIMManager.getSignalingManager().addSignalingListener(mSignalListener);
+        V2TIMManager.getMessageManager();
         V2TIMManager.getInstance().addSimpleMsgListener(mSimpleListener);
     }
 
@@ -570,7 +571,9 @@ public class TXRoomService extends V2TIMSDKListener {
             }
             return;
         }
-        sendC2CMsg(IMProtocol.getKickMsgJsonStr(userId), userId, callback);
+        String json = buildC2CMsg(IMProtocol.SignallingDefine.VALUE_CMD_KICK_USER, userId);
+        TRTCLogger.i(TAG, "send json:" + json);
+        sendC2CMsg(json, userId, callback);
     }
 
     public void sendPickMsg(String userId, final TXCallback callback) {
@@ -581,9 +584,19 @@ public class TXRoomService extends V2TIMSDKListener {
             }
             return;
         }
-        sendC2CMsg(IMProtocol.getPickMsgJsonStr(userId), userId, callback);
+        String json = buildC2CMsg(IMProtocol.SignallingDefine.VALUE_CMD_PICK_USER, userId);
+        TRTCLogger.i(TAG, "send json:" + json);
+        sendC2CMsg(json, userId, callback);
     }
 
+    private String buildC2CMsg(String cmd, String userId) {
+        SignallingData signallingData = createSignallingData();
+        SignallingData.DataInfo dataInfo = signallingData.getData();
+        dataInfo.setCmd(cmd);
+        dataInfo.setUserId(userId);
+        String json = new Gson().toJson(signallingData);
+        return json;
+    }
 
     public void sendGroupMsg(String data, final TXCallback callback) {
         V2TIMManager.getInstance().sendGroupCustomMessage(data.getBytes(), mRoomId, V2TIMMessage.V2TIM_PRIORITY_NORMAL, new V2TIMValueCallback<V2TIMMessage>() {
@@ -604,7 +617,7 @@ public class TXRoomService extends V2TIMSDKListener {
         });
     }
 
-    public void sendC2CMsg(String data, String userId, final TXCallback callback) {
+    private void sendC2CMsg(String data, String userId, final TXCallback callback) {
         V2TIMManager.getInstance().sendC2CCustomMessage(data.getBytes(), userId, new V2TIMValueCallback<V2TIMMessage>() {
             @Override
             public void onError(int i, String s) {
@@ -705,9 +718,21 @@ public class TXRoomService extends V2TIMSDKListener {
     }
 
     public String sendInvitation(String cmd, String userId, String content, final TXCallback callback) {
-        String json = IMProtocol.getInvitationMsg(mRoomId, cmd, content);
+        int roomId = 0;
+        try {
+            roomId = Integer.parseInt(mRoomId);
+        } catch (Exception e) {
+            TRTCLogger.e(TAG, "room is not right: " + mRoomId);
+            return "";
+        }
+        SignallingData signallingData = createSignallingData();
+        SignallingData.DataInfo dataInfo = signallingData.getData();
+        dataInfo.setCmd(cmd);
+        dataInfo.setUserId(content);
+        dataInfo.setRoomID(roomId);
+        String json = new Gson().toJson(signallingData);
         TRTCLogger.i(TAG, "send " + userId + " json:" + json);
-        return V2TIMManager.getSignalingManager().invite(userId, json, MAX_INVITATION_TIME_OUT, new V2TIMCallback() {
+        return V2TIMManager.getSignalingManager().invite(userId, json, true, null, MAX_INVITATION_TIME_OUT, new V2TIMCallback() {
             @Override
             public void onError(int i, String s) {
                 TRTCLogger.e(TAG, "sendInvitation error " + i);
@@ -728,7 +753,9 @@ public class TXRoomService extends V2TIMSDKListener {
 
     public void acceptInvitation(String id, final TXCallback callback) {
         TRTCLogger.i(TAG, "acceptInvitation " + id);
-        V2TIMManager.getSignalingManager().accept(id, null, new V2TIMCallback() {
+        SignallingData signallingData = createSignallingData();
+        String json = new Gson().toJson(signallingData);
+        V2TIMManager.getSignalingManager().accept(id, json, new V2TIMCallback() {
             @Override
             public void onError(int i, String s) {
                 TRTCLogger.e(TAG, "acceptInvitation error " + i);
@@ -749,7 +776,9 @@ public class TXRoomService extends V2TIMSDKListener {
 
     public void rejectInvitation(String id, final TXCallback callback) {
         TRTCLogger.i(TAG, "rejectInvitation " + id);
-        V2TIMManager.getSignalingManager().reject(id, null, new V2TIMCallback() {
+        SignallingData signallingData = createSignallingData();
+        String json = new Gson().toJson(signallingData);
+        V2TIMManager.getSignalingManager().reject(id, json, new V2TIMCallback() {
             @Override
             public void onError(int i, String s) {
                 TRTCLogger.e(TAG, "rejectInvitation error " + i);
@@ -769,7 +798,9 @@ public class TXRoomService extends V2TIMSDKListener {
 
     public void cancelInvitation(String id, final TXCallback callback) {
         TRTCLogger.i(TAG, "cancelInvitation " + id);
-        V2TIMManager.getSignalingManager().cancel(id, null, new V2TIMCallback() {
+        SignallingData signallingData = createSignallingData();
+        String json = new Gson().toJson(signallingData);
+        V2TIMManager.getSignalingManager().cancel(id, json, new V2TIMCallback() {
             @Override
             public void onError(int i, String s) {
                 TRTCLogger.e(TAG, "cancelInvitation error " + i);
@@ -828,7 +859,7 @@ public class TXRoomService extends V2TIMSDKListener {
 
             @Override
             public void onSuccess(List<V2TIMGroupInfoResult> v2TIMGroupInfoResults) {
-                List<TXRoomInfo>            txRoomInfos        = new ArrayList<>();
+                List<TXRoomInfo> txRoomInfos = new ArrayList<>();
                 Map<String, V2TIMGroupInfo> groupInfoResultMap = new HashMap<>();
                 // 注意 IM 返回的顺序可能不对，所以需要重新排序
                 if (v2TIMGroupInfoResults != null) {
@@ -889,7 +920,7 @@ public class TXRoomService extends V2TIMSDKListener {
                 // 一定会有自定义消息的头
                 try {
                     JSONObject jsonObject = new JSONObject(customStr);
-                    String     version    = jsonObject.getString(IMProtocol.Define.KEY_ATTR_VERSION);
+                    String version = jsonObject.getString(IMProtocol.Define.KEY_ATTR_VERSION);
                     if (!version.equals(IMProtocol.Define.VALUE_ATTR_VERSION)) {
                         TRTCLogger.e(TAG, "protocol version is not match, ignore msg.");
                     }
@@ -929,26 +960,28 @@ public class TXRoomService extends V2TIMSDKListener {
         public void onRecvC2CCustomMessage(String msgID, V2TIMUserInfo sender, byte[] customData) {
             String customStr = new String(customData);
             if (!TextUtils.isEmpty(customStr)) {
-                try {
-                    JSONObject jsonObject = new JSONObject(customStr);
-                    String version = jsonObject.getString(IMProtocol.Define.KEY_ATTR_VERSION);
-                    if (!version.equals(IMProtocol.Define.VALUE_ATTR_VERSION)) {
-                        TRTCLogger.e(TAG, "protocol version is not match, ignore msg.");
-                    }
-                    int action = jsonObject.getInt(IMProtocol.Define.KEY_CMD_ACTION);
-                    switch (action) {
-                        case IMProtocol.Define.CODE_ROOM_KICK_SEAT_MSG:
-                            String kickUserId = jsonObject.getString("userId");
-                            onSeatLeave(kickUserId);
-                            break;
-                        case IMProtocol.Define.CODE_ROOM_PICK_SEAT_MSG:
-                            String pickUserId = jsonObject.getString("userId");
-                            onSeatTake(pickUserId);
-                            break;
-                        default:
-                            break;
-                    }
-                } catch (JSONException e) {
+                TRTCLogger.i(TAG, "onRecvC2CCustomMessage: " + customStr);
+                SignallingData signallingData = IMProtocol.convert2SignallingData(customStr);
+                if (!isChatSalonData(signallingData)) {
+                    TRTCLogger.d(TAG, "this is not the chat salon sense ");
+                    return;
+                }
+                SignallingData.DataInfo dataInfo = signallingData.getData();
+                if (dataInfo == null) {
+                    TRTCLogger.e(TAG, "parse data error, dataInfo is null");
+                    return;
+                }
+                String cmd = dataInfo.getCmd();
+                String userId = dataInfo.getUserId();
+                switch (cmd) {
+                    case IMProtocol.SignallingDefine.VALUE_CMD_KICK_USER:
+                        onSeatLeave(userId);
+                        break;
+                    case IMProtocol.SignallingDefine.VALUE_CMD_PICK_USER:
+                        onSeatTake(userId);
+                        break;
+                    default:
+                        break;
                 }
             }
         }
@@ -1001,18 +1034,23 @@ public class TXRoomService extends V2TIMSDKListener {
     private class VoiceRoomSignalListener extends V2TIMSignalingListener {
         @Override
         public void onReceiveNewInvitation(String inviteID, String inviter, String groupId, List<String> inviteeList, String data) {
-            TRTCLogger.i(TAG, "recv new invitation: " + inviteID + " from " + inviter);
+            TRTCLogger.i(TAG, "recv new invitation: " + inviteID + " from " + inviter + " data:" + data);
             if (mDelegate != null) {
-                TXInviteData txInviteData = IMProtocol.parseInvitationMsg(data);
-                if (txInviteData == null) {
-                    TRTCLogger.e(TAG, "parse data error");
+                SignallingData signallingData = IMProtocol.convert2SignallingData(data);
+                if (!isChatSalonData(signallingData)) {
+                    TRTCLogger.d(TAG, "this is not the chat salon sense ");
                     return;
                 }
-                if (!mRoomId.equals(txInviteData.roomId)) {
+                SignallingData.DataInfo dataInfo = signallingData.getData();
+                if (dataInfo == null) {
+                    TRTCLogger.e(TAG, "parse data error, dataInfo is null");
+                    return;
+                }
+                if (!mRoomId.equals(String.valueOf(dataInfo.getRoomID()))) {
                     TRTCLogger.e(TAG, "roomId is not right");
                     return;
                 }
-                mDelegate.onReceiveNewInvitation(inviteID, inviter, txInviteData.command, txInviteData.message);
+                mDelegate.onReceiveNewInvitation(inviteID, inviter, dataInfo.getCmd(), dataInfo.getUserId());
             }
         }
 
@@ -1047,5 +1085,23 @@ public class TXRoomService extends V2TIMSDKListener {
                 mDelegate.onInvitationTimeout(inviteID, inviteeList);
             }
         }
+    }
+
+    private boolean isChatSalonData(SignallingData signallingData) {
+        if (signallingData == null) {
+            return false;
+        }
+        String businessId = signallingData.getBusinessID();
+        return IMProtocol.SignallingDefine.VALUE_BUSINESS_ID.equals(businessId);
+    }
+
+    private SignallingData createSignallingData() {
+        SignallingData callingData = new SignallingData();
+        callingData.setVersion(IMProtocol.SignallingDefine.VALUE_VERSION);
+        callingData.setBusinessID(IMProtocol.SignallingDefine.VALUE_BUSINESS_ID);
+        callingData.setPlatform(IMProtocol.SignallingDefine.VALUE_PLATFORM);
+        SignallingData.DataInfo dataInfo = new SignallingData.DataInfo();
+        callingData.setData(dataInfo);
+        return callingData;
     }
 }
