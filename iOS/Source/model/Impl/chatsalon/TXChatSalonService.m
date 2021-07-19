@@ -381,7 +381,16 @@
         return;
     }
     
-    NSString *msg = [TXChatSalonIMJsonHandle getKickMsgJsonStrWithUserID:userID];
+    NSDictionary *dic = @{
+        CHAT_SALON_KEY_CMD_VERSION : @(CHAT_SALON_VALUE_CMD_VERSION),
+        CHAT_SALON_KEY_CMD_BUSINESSID : CHAT_SALON_VALUE_CMD_BUSINESSID,
+        CHAT_SALON_KEY_CMD_PLATFORM : CHAT_SALON_VALUE_CMD_PLATFORM,
+        CHAT_SALON_KEY_CMD_DATA : @{
+                CHAT_SALON_KEY_CMD_CMD : CHAT_SALON_VALUE_CMD_KICK,
+                CHAT_SALON_KEY_CMD_USERID : userID,
+        }
+    };
+    NSString *msg = [dic mj_JSONString];
     [self.imManager sendC2CCustomMessage:[msg dataUsingEncoding:NSUTF8StringEncoding] to:userID succ:^{
         if (callback) {
             callback(0, @"send c2c custom message success.");
@@ -556,7 +565,18 @@
 }
 
 - (NSString *)sendInvitation:(NSString *)cmd userID:(NSString *)userID content:(NSString *)content callback:(TXCallback)callback {
-    NSString* jsonString = [TXChatSalonIMJsonHandle getInvitationMsgWithRoomId:self.mRoomId cmd:cmd content:content];
+    NSDictionary *dic = @{
+        CHAT_SALON_KEY_CMD_VERSION : @(CHAT_SALON_VALUE_CMD_VERSION),
+        CHAT_SALON_KEY_CMD_BUSINESSID : CHAT_SALON_VALUE_CMD_BUSINESSID,
+        CHAT_SALON_KEY_CMD_PLATFORM : CHAT_SALON_VALUE_CMD_PLATFORM,
+        CHAT_SALON_KEY_CMD_EXTINFO : @"",
+        CHAT_SALON_KEY_CMD_DATA : @{
+                CHAT_SALON_KEY_CMD_ROOMID : @([self.mRoomId intValue]),
+                CHAT_SALON_KEY_CMD_CMD : cmd,
+                CHAT_SALON_KEY_CMD_USERID : content,
+        },
+    };
+    NSString *jsonString = [dic mj_JSONString];
     return [self.imManager invite:userID data:jsonString onlineUserOnly:true offlinePushInfo:nil timeout:20 succ:^{
         TRTCLog(@"send invitation success.");
         if (callback) {
@@ -571,7 +591,13 @@
 
 - (void)acceptInvitation:(NSString *)identifier callback:(TXCallback)callback {
     TRTCLog(@"accept %@", identifier);
-    [self.imManager accept:identifier data:nil succ:^{
+    NSDictionary *dic = @{
+        CHAT_SALON_KEY_CMD_VERSION : @(CHAT_SALON_VALUE_CMD_VERSION),
+        CHAT_SALON_KEY_CMD_BUSINESSID : CHAT_SALON_VALUE_CMD_BUSINESSID,
+        CHAT_SALON_KEY_CMD_PLATFORM : CHAT_SALON_VALUE_CMD_PLATFORM,
+    };
+    NSString *jsonString = [dic mj_JSONString];
+    [self.imManager accept:identifier data:jsonString succ:^{
         TRTCLog(@"accept invitation success.");
         if (callback) {
             callback(0, @"accept invitation success.");
@@ -586,7 +612,13 @@
 
 - (void)rejectInvitaiton:(NSString *)identifier callback:(TXCallback)callback {
     TRTCLog(@"reject %@", identifier);
-    [self.imManager reject:identifier data:nil succ:^{
+    NSDictionary *dic = @{
+        CHAT_SALON_KEY_CMD_VERSION : @(CHAT_SALON_VALUE_CMD_VERSION),
+        CHAT_SALON_KEY_CMD_BUSINESSID : CHAT_SALON_VALUE_CMD_BUSINESSID,
+        CHAT_SALON_KEY_CMD_PLATFORM : CHAT_SALON_VALUE_CMD_PLATFORM,
+    };
+    NSString *jsonString = [dic mj_JSONString];
+    [self.imManager reject:identifier data:jsonString succ:^{
         TRTCLog(@"reject invitation success.");
         if (callback) {
             callback(0, @"reject invitation success.");
@@ -601,7 +633,13 @@
 
 - (void)cancelInvitation:(NSString *)identifier callback:(TXCallback)callback {
     TRTCLog(@"cancel %@", identifier);
-    [self.imManager cancel:identifier data:nil succ:^{
+    NSDictionary *dic = @{
+        CHAT_SALON_KEY_CMD_VERSION : @(CHAT_SALON_VALUE_CMD_VERSION),
+        CHAT_SALON_KEY_CMD_BUSINESSID : CHAT_SALON_VALUE_CMD_BUSINESSID,
+        CHAT_SALON_KEY_CMD_PLATFORM : CHAT_SALON_VALUE_CMD_PLATFORM,
+    };
+    NSString *jsonString = [dic mj_JSONString];
+    [self.imManager cancel:identifier data:jsonString succ:^{
         TRTCLog(@"cancel invitation success.");
         if (callback) {
             callback(0, @"cancel invitation success.");
@@ -626,30 +664,34 @@
     }
     NSString *jsonString = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
     NSDictionary *dic = [jsonString mj_JSONObject];
-    NSString *version = [dic objectForKey:VOICE_ROOM_KEY_ATTR_VERSION];
-    if (!version || ![version isEqualToString:VOICE_ROOM_VALUE_ATTR_VERSION]) {
+    if (!dic || ![dic isKindOfClass:[NSDictionary class]]) {
+        TRTCLog(@"parse data error");
+        return;
+    }
+    NSNumber *versionNum = [dic objectForKey:CHAT_SALON_KEY_CMD_VERSION];
+    if (!versionNum || ![versionNum isKindOfClass:[NSNumber class]]) {
         TRTCLog(@"protocol version is nil or not match, ignore c2c msg");
         return;
     }
-    NSNumber *action = [dic objectForKey:VOICE_ROOM_KEY_CMD_ACTION];
-    if (!action) {
-        TRTCLog(@"c2c action can't parse from data");
+    NSInteger version = versionNum.intValue;
+    if (version < CHAT_SALON_VALUE_CMD_BASIC_VERSION) {
+        TRTCLog(@"protocol version is nil or not match, ignore c2c msg");
         return;
     }
-    int actionValue = [action intValue];
-    switch (actionValue) {
-        case kChatSalonCodeKickSeatMsg:
-            if ([self canDelegateResponseMethod:@selector(onSeatKick)]) {
-                [self.delegate onSeatKick];
-            }
-            break;
-        case kChatSalonCodePickSeatMsg:
-            if ([self canDelegateResponseMethod:@selector(onSeatPick)]) {
-                [self.delegate onSeatPick];
-            }
-            break;
-        default:
-            break;
+    NSDictionary *cmdData = [dic objectForKey:CHAT_SALON_KEY_CMD_DATA];
+    if (!cmdData || ![cmdData isKindOfClass:[NSDictionary class]]) {
+        TRTCLog(@"parse data error");
+        return;
+    }
+    NSString *cmd = [cmdData objectForKey:CHAT_SALON_KEY_CMD_CMD];
+    if (!cmd || ![cmd isKindOfClass:[NSString class]]) {
+        TRTCLog(@"parse data command error");
+        return;
+    }
+    if ([cmd isEqualToString:CHAT_SALON_VALUE_CMD_KICK]) {
+        if ([self canDelegateResponseMethod:@selector(onSeatKick)]) {
+            [self.delegate onSeatKick];
+        }
     }
 }
 
@@ -794,17 +836,33 @@
 
 #pragma mark - V2TIMSignalingListener
 - (void)onReceiveNewInvitation:(NSString *)inviteID inviter:(NSString *)inviter groupID:(NSString *)groupID inviteeList:(NSArray<NSString *> *)inviteeList data:(NSString *)data{
-    TXChatSalonInviteData *result = [TXChatSalonIMJsonHandle parseInvitationMsgWithJson:data];
-    if (!result) {
+    
+    NSDictionary *dic = [data mj_JSONObject];
+    if (![dic isKindOfClass:[NSDictionary class]]) {
         TRTCLog(@"parse data error");
         return;
     }
-    if (![result.roomId isEqualToString:self.mRoomId]) {
+    NSInteger version = [[dic objectForKey:CHAT_SALON_KEY_CMD_VERSION] integerValue];
+    if (version < CHAT_SALON_VALUE_CMD_BASIC_VERSION) {
+        TRTCLog(@"protocol version is nil or not match, ignore c2c msg");
+        return;
+    }
+    NSString *businessID = [dic objectForKey:CHAT_SALON_KEY_CMD_BUSINESSID];
+    if (!businessID || ![businessID isEqualToString:CHAT_SALON_VALUE_CMD_BUSINESSID]) {
+        TRTCLog(@"bussiness id error");
+        return;
+    }
+    
+    NSDictionary *cmdData = [dic objectForKey:CHAT_SALON_KEY_CMD_DATA];
+    NSString *cmd = [cmdData objectForKey:CHAT_SALON_KEY_CMD_CMD];
+    NSString *content = [cmdData objectForKey:CHAT_SALON_KEY_CMD_USERID];
+    int roomID = [[cmdData objectForKey:CHAT_SALON_KEY_CMD_ROOMID] intValue];
+    if (roomID != [self.mRoomId intValue]) {
         TRTCLog(@"room id is not right");
         return;
     }
     if ([self canDelegateResponseMethod:@selector(onReceiveNewInvitationWithIdentifier:inviter:cmd:content:)]) {
-        [self.delegate onReceiveNewInvitationWithIdentifier:inviteID inviter:inviter cmd:result.command content:result.message];
+        [self.delegate onReceiveNewInvitationWithIdentifier:inviteID inviter:inviter cmd:cmd content:content];
     }
 }
 

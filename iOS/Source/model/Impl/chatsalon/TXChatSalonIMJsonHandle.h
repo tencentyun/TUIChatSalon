@@ -26,6 +26,23 @@ static NSString* VOICE_ROOM_VALUE_INVITATION_VERSION = @"1.0";
 static NSString* VOICE_ROOM_KEY_INVITATION_CMD = @"command";
 static NSString* VOICE_ROOM_KEY_INVITAITON_CONTENT = @"content";
 
+static NSString* CHAT_SALON_KEY_CMD_VERSION = @"version";
+static NSString* CHAT_SALON_KEY_CMD_BUSINESSID = @"businessID";
+static NSString* CHAT_SALON_KEY_CMD_PLATFORM = @"platform";
+static NSString* CHAT_SALON_KEY_CMD_EXTINFO = @"extInfo";
+static NSString* CHAT_SALON_KEY_CMD_DATA = @"data";
+static NSString* CHAT_SALON_KEY_CMD_ROOMID = @"room_id";
+static NSString* CHAT_SALON_KEY_CMD_CMD = @"cmd";
+static NSString* CHAT_SALON_KEY_CMD_USERID = @"user_id";
+
+static NSInteger CHAT_SALON_VALUE_CMD_BASIC_VERSION = 1;
+static NSInteger CHAT_SALON_VALUE_CMD_VERSION = 1;
+static NSString* CHAT_SALON_VALUE_CMD_BUSINESSID = @"ChatSalon";
+static NSString* CHAT_SALON_VALUE_CMD_PLATFORM = @"iOS";
+static NSString* CHAT_SALON_VALUE_CMD_PICK = @"pickUser";
+static NSString* CHAT_SALON_VALUE_CMD_TAKE = @"takeSeat";
+static NSString* CHAT_SALON_VALUE_CMD_KICK = @"kickUser";
+
 typedef NS_ENUM(NSUInteger, TXChatSalonCustomCodeType) {
     kChatSalonCodeUnknown = 0,
     kChatSalonCodeDestroy = 200,
