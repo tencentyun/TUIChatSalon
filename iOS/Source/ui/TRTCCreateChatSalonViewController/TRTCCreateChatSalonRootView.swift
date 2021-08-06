@@ -26,7 +26,7 @@ class TRTCCreateChatSalonRootView: UIView {
         self.viewModel = viewModel
         super.init(frame: frame)
         backgroundColor = .white
-        roomNameInputTextFiled.text = viewModel.roomName
+        roomNameInputTextFiled.text = viewModel.roomName.subString(toByteLength: createRoomTextMaxByteLength)
         bindInteraction()
     }
     
@@ -111,7 +111,7 @@ class TRTCCreateChatSalonRootView: UIView {
     func bindInteraction() {
         roomNameInputTextFiled.delegate = self
         
-        roomNameInputTextFiled.text = viewModel.roomName
+        roomNameInputTextFiled.text = viewModel.roomName.subString(toByteLength: createRoomTextMaxByteLength)
         enterRoomButton.addTarget(self, action: #selector(enterRoomAction(_:)), for: .touchUpInside)
     }
     
@@ -140,7 +140,7 @@ extension TRTCCreateChatSalonRootView: UITextFieldDelegate {
             }
             let newText = (textFieldText as NSString).replacingCharacters(in: range, with: string)
             if newText.byteLength() > 30 && string.byteLength() > 30 {
-                textField.text = newText.subString(fromByteLength: 30)
+                textField.text = newText.subString(toByteLength: 30)
                 return false
             }
             return newText.byteLength() <= 30
@@ -156,31 +156,7 @@ extension TRTCCreateChatSalonRootView: UITextFieldDelegate {
         }
     }
 }
-extension String {
-    func byteLength() -> Int {
-        guard let data = data(using: .utf8) else {
-            return 0
-        }
-        return data.count
-    }
-    func subString(fromByteLength: Int) -> String {
-        guard let data = data(using: .utf8) else {
-            return ""
-        }
-        if data.count > fromByteLength {
-            guard let str = String(data: data[0..<fromByteLength], encoding: .utf8) else {
-                guard let str = String(data: data[0..<(fromByteLength - 1)], encoding: .utf8) else {
-                    return ""
-                }
-                return str
-            }
-            return str
-        }
-        else {
-            return self
-        }
-    }
-}
+
 extension TRTCCreateChatSalonRootView {
     
     @objc
