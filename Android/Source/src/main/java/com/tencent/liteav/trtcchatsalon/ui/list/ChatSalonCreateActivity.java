@@ -11,7 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.tencent.liteav.login.model.ProfileManager;
+import com.tencent.liteav.basic.UserModelManager;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.ui.utils.StatusBarUtils;
 import com.tencent.liteav.trtcchatsalon.ui.room.ChatSalonAnchorActivity;
@@ -74,18 +74,18 @@ public class ChatSalonCreateActivity extends AppCompatActivity {
     }
 
     private void initThemeAndNickname() {
-        String userId   = ProfileManager.getInstance().getUserModel().userId;
-        String userName = ProfileManager.getInstance().getUserModel().userName;
+        String userId   = UserModelManager.getInstance().getUserModel().userId;
+        String userName = UserModelManager.getInstance().getUserModel().userName;
         String showUserName = !TextUtils.isEmpty(userName) ? userName : userId;
         mRoomNameEt.setText(getString(R.string.trtcchatsalon_create_theme, showUserName));
     }
 
     private void createRoom() {
         String roomName    = mRoomNameEt.getText().toString();
-        String userId      = ProfileManager.getInstance().getUserModel().userId;
-        String userAvatar  = ProfileManager.getInstance().getUserModel().userAvatar;
-        String coverAvatar = ProfileManager.getInstance().getUserModel().userAvatar;
-        String userName = ProfileManager.getInstance().getUserModel().userName;
+        String userId      = UserModelManager.getInstance().getUserModel().userId;
+        String userAvatar  = UserModelManager.getInstance().getUserModel().userAvatar;
+        String coverAvatar = UserModelManager.getInstance().getUserModel().userAvatar;
+        String userName = UserModelManager.getInstance().getUserModel().userName;
         if (roomName.getBytes().length > MAX_LEN) {
             ToastUtils.showLong(getText(R.string.trtcchatsalon_warning_room_name_too_long));
             return;

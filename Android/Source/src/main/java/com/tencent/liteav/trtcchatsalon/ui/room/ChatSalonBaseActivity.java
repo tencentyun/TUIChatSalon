@@ -20,8 +20,8 @@ import android.widget.TextView;
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
-import com.tencent.liteav.login.model.ProfileManager;
-import com.tencent.liteav.login.model.UserModel;
+import com.tencent.liteav.basic.UserModel;
+import com.tencent.liteav.basic.UserModelManager;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalon;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalonCallback;
@@ -97,7 +97,7 @@ public class ChatSalonBaseActivity extends AppCompatActivity implements ChatSalo
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ProfileManager.getInstance().getUserModel().userType = UserModel.UserType.CHAT_SALON;
+        UserModelManager.getInstance().getUserModel().userType = UserModel.UserType.CHAT_SALON;
         mContext = this;
         // 应用运行时，保持不锁屏、全屏化
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -111,7 +111,7 @@ public class ChatSalonBaseActivity extends AppCompatActivity implements ChatSalo
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ProfileManager.getInstance().getUserModel().userType = UserModel.UserType.NONE;
+        UserModelManager.getInstance().getUserModel().userType = UserModel.UserType.NONE;
     }
 
     protected void initListener() {
@@ -314,7 +314,7 @@ public class ChatSalonBaseActivity extends AppCompatActivity implements ChatSalo
         }
         entity.userId = user.userId;
         entity.userName = user.userName;
-        entity.userAvatar = user.userAvatar;
+        entity.userAvatar = user.userAvatar.startsWith("https://") ? user.userAvatar : "";
         entity.enterTime = System.currentTimeMillis();
         mMemberEntityMap.put(user.userId, entity);
         mAnchorAdapter.addMember(entity);

@@ -6,8 +6,6 @@ import android.os.Looper;
 import android.text.TextUtils;
 
 import com.tencent.liteav.audio.TXAudioEffectManager;
-import com.tencent.liteav.login.model.ProfileManager;
-import com.tencent.liteav.login.model.UserModel;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalon;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalonCallback;

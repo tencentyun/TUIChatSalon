@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.tencent.liteav.basic.ImageLoader;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.ui.base.ChatSalonMemberEntity;
 
@@ -144,11 +144,7 @@ public class  ChatSalonAnchorAdapter extends
 
                 }
             });
-            if (!TextUtils.isEmpty(model.userAvatar)) {
-                Picasso.get().load(model.userAvatar).placeholder(R.drawable.trtcchatsalon_ic_head).error(R.drawable.trtcchatsalon_ic_head).into(mImgHead);
-            } else {
-                mImgHead.setImageResource(R.drawable.trtcchatsalon_ic_head);
-            }
+            ImageLoader.loadImage(context, mImgHead, model.userAvatar, R.drawable.trtcchatsalon_ic_head);
             if (!TextUtils.isEmpty(model.userName)) {
                 mTvName.setText(model.userName);
             } else {

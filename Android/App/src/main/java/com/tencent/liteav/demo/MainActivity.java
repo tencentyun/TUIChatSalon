@@ -20,9 +20,10 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.tencent.imsdk.v2.V2TIMGroupInfoResult;
+import com.tencent.liteav.basic.UserModel;
+import com.tencent.liteav.basic.UserModelManager;
 import com.tencent.liteav.debug.GenerateTestUserSig;
-import com.tencent.liteav.login.model.ProfileManager;
-import com.tencent.liteav.login.model.UserModel;
+import com.tencent.liteav.trtcchatsalon.model.ChatSalonRoomManager;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalon;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalonCallback;
 import com.tencent.liteav.trtcchatsalon.ui.list.ChatSalonCreateActivity;
@@ -107,12 +108,20 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        final UserModel userModel = ProfileManager.getInstance().getUserModel();
+        final UserModel userModel = UserModelManager.getInstance().getUserModel();
         mTRTCChatSalon = TRTCChatSalon.sharedInstance(this);
         mTRTCChatSalon.login(GenerateTestUserSig.SDKAPPID, userModel.userId, userModel.userSig, new TRTCChatSalonCallback.ActionCallback() {
             @Override
             public void onCallback(int code, String msg) {
                 Log.d(TAG, "code: "+code + " msg:"+msg);
+                mTRTCChatSalon.setSelfProfile(userModel.userName, userModel.userAvatar, new TRTCChatSalonCallback.ActionCallback() {
+                    @Override
+                    public void onCallback(int code, String msg) {
+                        if (code == 0) {
+                            Log.d(TAG, "setSelfProfile success");
+                        }
+                    }
+                });
             }
         });
     }
@@ -123,7 +132,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void enterRoom(final String roomIdStr) {
-        ProfileManager.getInstance().getGroupInfo(roomIdStr, new ProfileManager.GetGroupInfoCallback() {
+        ChatSalonRoomManager.getInstance().getGroupInfo(roomIdStr, new ChatSalonRoomManager.GetGroupInfoCallback() {
             @Override
             public void onSuccess(V2TIMGroupInfoResult result) {
                 if (isRoomExist(result)) {
@@ -141,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void realEnterRoom(String roomIdStr) {
-        UserModel userModel = ProfileManager.getInstance().getUserModel();
+        UserModel userModel = UserModelManager.getInstance().getUserModel();
         String userId = userModel.userId;
         int roomId;
         try {

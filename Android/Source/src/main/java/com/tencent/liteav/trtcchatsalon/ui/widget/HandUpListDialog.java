@@ -15,7 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.squareup.picasso.Picasso;
+import com.tencent.liteav.basic.ImageLoader;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.ui.base.ChatSalonMemberEntity;
 
@@ -162,12 +162,7 @@ public class HandUpListDialog extends BottomSheetDialog {
                     mUserNameTv.setText(model.userName);
                 }
 
-                if (!TextUtils.isEmpty(model.userAvatar)) {
-                    Picasso.get().load(model.userAvatar).placeholder(R.drawable.trtcchatsalon_ic_cover).into(mImageAvatar);
-                } else {
-                    mImageAvatar.setImageResource(R.drawable.trtcchatsalon_ic_cover);
-                }
-
+                ImageLoader.loadImage(context, mImageAvatar, model.userAvatar, R.drawable.trtcchatsalon_ic_head);
                 mButtonInvite.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
