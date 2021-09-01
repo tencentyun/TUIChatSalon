@@ -5,11 +5,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.AppCompatImageButton;
-import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.appcompat.widget.Toolbar;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
@@ -314,7 +314,7 @@ public class ChatSalonBaseActivity extends AppCompatActivity implements ChatSalo
         }
         entity.userId = user.userId;
         entity.userName = user.userName;
-        entity.userAvatar = user.userAvatar.startsWith("https://") ? user.userAvatar : "";
+        entity.userAvatar = user.userAvatar;
         entity.enterTime = System.currentTimeMillis();
         mMemberEntityMap.put(user.userId, entity);
         mAnchorAdapter.addMember(entity);

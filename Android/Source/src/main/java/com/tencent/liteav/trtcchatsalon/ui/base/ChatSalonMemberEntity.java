@@ -1,6 +1,6 @@
 package com.tencent.liteav.trtcchatsalon.ui.base;
 
-import android.support.annotation.NonNull;
+import androidx.annotation.NonNull;
 
 public class ChatSalonMemberEntity implements Comparable<ChatSalonMemberEntity> {
     public String  userId;

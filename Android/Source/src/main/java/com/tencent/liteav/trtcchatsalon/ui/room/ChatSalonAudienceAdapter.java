@@ -1,8 +1,8 @@
 package com.tencent.liteav.trtcchatsalon.ui.room;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
-import android.support.v7.widget.RecyclerView;
+import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,7 +14,6 @@ import com.tencent.liteav.basic.ImageLoader;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.ui.base.ChatSalonMemberEntity;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 

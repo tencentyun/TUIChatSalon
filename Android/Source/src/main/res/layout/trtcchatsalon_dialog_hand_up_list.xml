@@ -18,7 +18,7 @@
         android:textStyle="bold"
         android:textSize="24sp" />
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -27,5 +27,5 @@
         android:layout_marginTop="30dp"
         android:layout_marginRight="20dp">
 
-    </android.support.v7.widget.RecyclerView>
+    </androidx.recyclerview.widget.RecyclerView>
 </RelativeLayout>
