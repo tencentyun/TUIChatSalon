@@ -144,7 +144,12 @@ public class  ChatSalonAnchorAdapter extends
 
                 }
             });
-            ImageLoader.loadImage(context, mImgHead, model.userAvatar, R.drawable.trtcchatsalon_ic_head);
+            if (TextUtils.isEmpty(model.userAvatar) || !isUrl(model.userAvatar)) {
+                ImageLoader.loadImage(context, mImgHead, null, R.drawable.trtcchatsalon_ic_head);
+            } else {
+                ImageLoader.loadImage(context, mImgHead, model.userAvatar,
+                        R.drawable.trtcchatsalon_ic_head);
+            }
             if (!TextUtils.isEmpty(model.userName)) {
                 mTvName.setText(model.userName);
             } else {
@@ -170,6 +175,10 @@ public class  ChatSalonAnchorAdapter extends
             mIvMute       = (ImageView) itemView.findViewById(R.id.iv_mute);
             mIvTalkBorder = (ImageView) itemView.findViewById(R.id.iv_talk_border);
             mTvName       = (TextView) itemView.findViewById(R.id.tv_name);
+        }
+
+        private boolean isUrl(String url) {
+            return url.startsWith("http://") || url.startsWith("https://");
         }
     }
 }

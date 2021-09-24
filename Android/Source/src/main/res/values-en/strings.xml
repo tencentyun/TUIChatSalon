@@ -32,10 +32,10 @@
     <string name="trtcchatsalon_welcome">Welcome</string>
     <string name="trtcchatsalon_dismiss">Dismiss</string>
     <string name="trtcchatsalon_cancel">Cancel</string>
-    <string name="trtcchatsalon_create_theme">the topic of %s</string>
+    <string name="trtcchatsalon_create_theme">%s\'s salon room</string>
     <string name="trtcchatsalon_request_an">%s applies to become a speaker</string>
-    <string name="trtcchatsalon_anchor_leave_room">You want to end the room?</string>
-    <string name="trtcchatsalon_audience_leave_room">You want to leave the room?</string>
+    <string name="trtcchatsalon_anchor_leave_room">The room will close after you leave. Leave?</string>
+    <string name="trtcchatsalon_audience_leave_room">Are you sure you want to leave?</string>
     <string name="trtcchatsalon_create_salon">Create a chat salon room</string>
     <string name="trtcchatsalon_request_leave_mic">move to the audience</string>
     <string name="trtcchatsalon_exit_room_success">quit room successfully</string>
