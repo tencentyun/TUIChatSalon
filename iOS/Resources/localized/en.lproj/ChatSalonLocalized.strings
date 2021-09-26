@@ -40,7 +40,7 @@
 "Demo.TRTC.Salon.invitelimited" = "The request is being processed, please try again later";
 "Demo.TRTC.Salon.raisedhandandwaitmanageraccept" = "You raised your hand! We'll let the speakers know you want to talk~";
 "Demo.TRTC.Salon.createsalonroom" = "Create a chat salon room";
-"Demo.TRTC.Salon.topic" = "Subject";
+"Demo.TRTC.Salon.topic" = "Topic";
 "Demo.TRTC.Salon.defaultroomtopic" = "default room topic";
 "Demo.TRTC.Salon.userid" = "Username";
 "Demo.TRTC.Salon.defaultuserid" = "default user ID";
