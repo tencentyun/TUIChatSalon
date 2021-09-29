@@ -14,6 +14,9 @@ import com.tencent.trtc.TRTCCloud;
 import com.tencent.trtc.TRTCCloudDef;
 import com.tencent.trtc.TRTCCloudListener;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ChatSalonTRTCService extends TRTCCloudListener {
@@ -80,11 +83,25 @@ public class ChatSalonTRTCService extends TRTCCloudListener {
         internalEnterRoom();
     }
 
+    private void setFramework(int framework) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("api", "setFramework");
+            JSONObject params = new JSONObject();
+            params.put("framework", framework);
+            jsonObject.put("params", params);
+            mTRTCCloud.callExperimentalAPI(jsonObject.toString());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void internalEnterRoom() {
         // 进房前设置一下监听，不然可能会被其他信息打断
         if (mTRTCParams == null) {
             return;
         }
+        setFramework(5);
         mTRTCCloud.setListener(this);
         mTRTCCloud.enterRoom(mTRTCParams, TRTCCloudDef.TRTC_APP_SCENE_VOICE_CHATROOM);
         // enable volume callback
