@@ -22,7 +22,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'Toast-Swift'
   spec.dependency 'Kingfisher'
   spec.dependency 'TXAppBasic'
-  spec.dependency 'TXIMSDK_Plus_iOS'
+  spec.dependency 'TXIMSDK_Plus_iOS', '~> 5.7.1435'
   
   spec.requires_arc = true
   spec.static_framework = true

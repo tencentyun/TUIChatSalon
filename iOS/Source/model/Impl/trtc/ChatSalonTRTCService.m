@@ -157,13 +157,17 @@
 }
 
 #pragma mark - private method
-- (void)internalEnterRoom {
+- (void)internalEnterRoom{
     if (self.mTRTCParms) {
         self.mTRTCCloud.delegate = self;
         [self enableAudioEvalutation:YES];
         [self setFramework:5];
         [self.mTRTCCloud enterRoom:self.mTRTCParms appScene:TRTCAppSceneVoiceChatRoom];
     }
+}
+
+- (BOOL)canDelegateResponseMethod:(SEL)method {
+    return self.delegate && [self.delegate respondsToSelector:method];
 }
 
 - (void)setFramework:(int)framework {
@@ -173,10 +177,6 @@
     NSString *jsonString = [[NSString alloc] initWithData:jsonData encoding:NSUTF8StringEncoding];
     TRTCLog(@"jsonString = %@",jsonString);
     [self.mTRTCCloud callExperimentalAPI: jsonString];
-}
-
-- (BOOL)canDelegateResponseMethod:(SEL)method {
-    return self.delegate && [self.delegate respondsToSelector:method];
 }
 
 #pragma mark - TRTCCloudDelegate
