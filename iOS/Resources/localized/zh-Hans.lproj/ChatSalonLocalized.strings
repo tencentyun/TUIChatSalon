@@ -9,7 +9,7 @@
 "Demo.TRTC.Salon.welcome" = "欢迎";
 "Demo.TRTC.Salon.dismiss" = "忽略";
 "Demo.TRTC.Salon.appliestobecomeaspeaker" = "申请成为主播";
-"Demo.TRTC.LiveRoom.accept" = "接受";
+"Demo.TRTC.LiveRoom.accept" = "确定";
 "Demo.TRTC.Salon.roomid" = "房间号";
 "Demo.TRTC.Salon.surewanttoleaveroom" = "确认离开房间吗";
 "Demo.TRTC.Salon.audienceconfirm" = "确认";

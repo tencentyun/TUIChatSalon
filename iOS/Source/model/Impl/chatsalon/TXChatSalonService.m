@@ -57,7 +57,7 @@
     if (!self.isInitIMSDK) {
         V2TIMSDKConfig *config = [[V2TIMSDKConfig alloc] init];
         config.logLevel = V2TIM_LOG_ERROR;
-        self.isInitIMSDK = [self.imManager initSDK:sdkAppId config:config listener:self];
+        self.isInitIMSDK = [self.imManager initSDK:sdkAppId config:config];
         if (!self.isInitIMSDK) {
             if (callback) {
                 callback(VOICE_ROOM_SERVICE_CODE_ERROR, @"init im sdk error.");
@@ -65,10 +65,13 @@
             return;
         }
     }
-    if (self.isLogin) {
-        self.selfUserId = userID;
+    NSString *loggedUserId = [self.imManager getLoginUser];
+    if (loggedUserId && [loggedUserId isEqualToString:userID]) {
+        // 已经登陆了
+        self.isLogin = YES;
+        self.selfUserId = loggedUserId;
         if (callback) {
-            callback(VOICE_ROOM_SERVICE_CODE_ERROR, @"start login fail, you have been login, can not login twice.");
+            callback(0, @"start login im success, but you have been login.");
         }
         return;
     }
@@ -119,9 +122,11 @@
         }
         return;
     }
+    self.isLogin = NO;
+    self.selfUserId = @"";
     [self.imManager logout:^{
         if (callback) {
-            callback(0, @"login im success.");
+            callback(0, @"im logout success.");
         }
     } fail:^(int code, NSString *desc) {
         if (callback) {
