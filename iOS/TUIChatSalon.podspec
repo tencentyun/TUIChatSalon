@@ -20,7 +20,7 @@ Pod::Spec.new do |spec|
   spec.dependency 'MJExtension'
   spec.dependency 'MJRefresh'
   spec.dependency 'Toast-Swift'
-  spec.dependency 'Kingfisher'
+  spec.dependency 'Kingfisher', '<= 6.3.1'
   spec.dependency 'TXAppBasic'
   spec.dependency 'TXIMSDK_Plus_iOS', '~> 5.7.1435'
   

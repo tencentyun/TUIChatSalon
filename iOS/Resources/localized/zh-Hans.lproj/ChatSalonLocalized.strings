@@ -11,9 +11,9 @@
 "Demo.TRTC.Salon.appliestobecomeaspeaker" = "申请成为主播";
 "Demo.TRTC.LiveRoom.accept" = "确定";
 "Demo.TRTC.Salon.roomid" = "房间号";
-"Demo.TRTC.Salon.surewanttoleaveroom" = "确认离开房间吗";
+"Demo.TRTC.Salon.surewanttoleaveroom" = "确认离开房间吗？";
 "Demo.TRTC.Salon.audienceconfirm" = "确认";
-"Demo.TRTC.Salon.waitabit" = "再等等";
+"Demo.TRTC.Salon.waitabit" = "取消";
 "Demo.TRTC.Salon.micmuted" = "已关闭麦克风";
 "Demo.TRTC.Salon.micunmuted" = "已打开麦克风";
 "Demo.TRTC.Salon.seatlistnotinit" = "麦位列表还未初始化哦！";
