@@ -89,7 +89,7 @@ public class TXRoomService extends V2TIMSDKListener {
         // 未初始化 IM 先初始化 IM
         if (!mIsInitIMSDK) {
             V2TIMSDKConfig config = new V2TIMSDKConfig();
-            mIsInitIMSDK = V2TIMManager.getInstance().initSDK(mContext, sdkAppId, config, this);
+            mIsInitIMSDK = V2TIMManager.getInstance().initSDK(mContext, sdkAppId, config);
             if (!mIsInitIMSDK) {
                 TRTCLogger.e(TAG, "init im sdk error.");
                 if (callback != null) {
@@ -100,21 +100,14 @@ public class TXRoomService extends V2TIMSDKListener {
         }
         mIsInitIMSDK = true;
         // 登陆到 IM
-        String loginedUserId = V2TIMManager.getInstance().getLoginUser();
-        if (loginedUserId != null && loginedUserId.equals(userId)) {
+        String loggedUserId = V2TIMManager.getInstance().getLoginUser();
+        if (loggedUserId != null && loggedUserId.equals(userId)) {
             // 已经登录过了
             mIsLogin = true;
             mSelfUserId = userId;
             TRTCLogger.i(TAG, "login im success.");
             if (callback != null) {
                 callback.onCallback(0, "login im success.");
-            }
-            return;
-        }
-        if (isLogin()) {
-            TRTCLogger.e(TAG, "start login fail, you have been login, can't login twice.");
-            if (callback != null) {
-                callback.onCallback(CODE_ERROR, "start login fail, you have been login, can't login twice.");
             }
             return;
         }
@@ -184,6 +177,9 @@ public class TXRoomService extends V2TIMSDKListener {
             }
             return;
         }
+
+        mIsLogin = false;
+        mSelfUserId = "";
         V2TIMManager.getInstance().logout(new V2TIMCallback() {
             @Override
             public void onError(int i, String s) {
@@ -195,8 +191,6 @@ public class TXRoomService extends V2TIMSDKListener {
 
             @Override
             public void onSuccess() {
-                mIsLogin = false;
-                mSelfUserId = "";
                 TRTCLogger.i(TAG, "logout im success.");
                 if (callback != null) {
                     callback.onCallback(0, "login im success.");
