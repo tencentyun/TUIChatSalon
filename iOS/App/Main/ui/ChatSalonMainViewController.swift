@@ -92,12 +92,13 @@ extension ChatSalonMainViewController {
         let cancelAction = UIAlertAction.init(title: TRTCChatSalonLocalize("App.PortalViewController.cancel"), style: .cancel, handler: nil)
         let sureAction = UIAlertAction.init(title: TRTCChatSalonLocalize("App.PortalViewController.determine"), style: .default) { (action) in
             ProfileManager.shared.removeLoginCache()
-            AppUtils.shared.appDelegate.showLoginViewController()
-            V2TIMManager.sharedInstance()?.logout({
-                
-            }, fail: { (errCode, errMsg) in
-                
-            })
+            TRTCChatSalon.shared().logout { (code, desc) in
+                if code == 0 {
+                    AppUtils.shared.appDelegate.showLoginViewController()
+                } else {
+                    debugPrint("logout error code: \(code) desc: \(desc)")
+                }
+            }
         }
         alertVC.addAction(cancelAction)
         alertVC.addAction(sureAction)

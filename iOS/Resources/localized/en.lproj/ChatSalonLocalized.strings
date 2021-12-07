@@ -9,9 +9,9 @@
 "Demo.TRTC.Salon.welcome" = "Welcome";
 "Demo.TRTC.Salon.dismiss" = "Dismiss";
 "Demo.TRTC.Salon.appliestobecomeaspeaker" = "applies to become a speaker";
-"Demo.TRTC.LiveRoom.accept" = "Accept";
+"Demo.TRTC.LiveRoom.accept" = "Confirm";
 "Demo.TRTC.Salon.roomid" = "Room ID";
-"Demo.TRTC.Salon.surewanttoleaveroom" = "You want to leave the room?";
+"Demo.TRTC.Salon.surewanttoleaveroom" = "Are you sure you want to leave?";
 "Demo.TRTC.Salon.audienceconfirm" = "Confirm";
 "Demo.TRTC.Salon.waitabit" = "Wait a bit";
 "Demo.TRTC.Salon.micmuted" = "Mic off";
