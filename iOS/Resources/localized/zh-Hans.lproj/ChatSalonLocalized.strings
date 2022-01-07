@@ -12,7 +12,7 @@
 "Demo.TRTC.LiveRoom.accept" = "确定";
 "Demo.TRTC.Salon.roomid" = "房间号";
 "Demo.TRTC.Salon.surewanttoleaveroom" = "确认离开房间吗？";
-"Demo.TRTC.Salon.audienceconfirm" = "确认";
+"Demo.TRTC.Salon.audienceconfirm" = "确定";
 "Demo.TRTC.Salon.waitabit" = "取消";
 "Demo.TRTC.Salon.micmuted" = "已关闭麦克风";
 "Demo.TRTC.Salon.micunmuted" = "已打开麦克风";
@@ -55,11 +55,7 @@
 "Demo.TRTC.Salon.leavequietly" = "安静离开~";
 "Demo.TRTC.LiveRoom.confirm" = "确定";
 "Demo.TRTC.LiveRoom.cancel" = "取消";
-
-
-
-
-"Demo.TRTC.Salon.wanttoendroom" = "离开会解散房间，确定离开吗？";
+"Demo.TRTC.Salon.wanttoendroom" = "离开会解散房间，确认离开吗？";
 "Demo.TRTC.Salon.seatmuted" = "被房主禁言";
 "Demo.TRTC.Salon.seatunmuted" = "被房主解禁";
 "Demo.TRTC.Salon.pleaseselect" = "请选择";

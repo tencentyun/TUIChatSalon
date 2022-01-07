@@ -78,7 +78,7 @@ public class TRTCChatSalonViewController: UIViewController {
     
     /// 取消
     @objc func cancel() {
-        presentAlert(title: "", message: String.alertTitle) { [weak self] in
+        presentAlert(title: "", message: (viewModel?.isOwner ?? false) ? .anchorAlertTitle : .audienceAlertTitle) { [weak self] in
             guard let `self` = self else { return }
             self.viewModel?.exitRoom() // 主播销毁房间
         }
@@ -103,7 +103,8 @@ extension TRTCChatSalonViewController {
 
 private extension String {
     static let controllerTitle = ChatSalonLocalize("Demo.TRTC.Salon.roomid")
-    static let alertTitle = ChatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
+    static let anchorAlertTitle = ChatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
+    static let audienceAlertTitle = ChatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
     static let alertConfirm = ChatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
     static let alertCancel = ChatSalonLocalize("Demo.TRTC.Salon.waitabit")
 }

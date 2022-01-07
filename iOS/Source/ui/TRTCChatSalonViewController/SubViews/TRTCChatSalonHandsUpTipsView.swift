@@ -26,6 +26,9 @@ class TRTCChatSalonHandsUpTipsView: UIView {
         label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 14)
         label.text = String.successMsg
+        label.numberOfLines = 2
+        label.adjustsFontSizeToFitWidth = true
+        label.minimumScaleFactor = 0.5
         return label
     }()
     
@@ -57,6 +60,7 @@ class TRTCChatSalonHandsUpTipsView: UIView {
         
         contentLabel.snp.makeConstraints { (make) in
             make.left.equalTo(handsImgView.snp.right).offset(8)
+            make.right.lessThanOrEqualToSuperview().offset(-8)
             make.centerY.equalTo(handsImgView)
         }
         
