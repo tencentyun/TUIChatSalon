@@ -12,8 +12,8 @@
 "Demo.TRTC.LiveRoom.accept" = "Confirm";
 "Demo.TRTC.Salon.roomid" = "Room ID";
 "Demo.TRTC.Salon.surewanttoleaveroom" = "Are you sure you want to leave?";
-"Demo.TRTC.Salon.audienceconfirm" = "Confirm";
-"Demo.TRTC.Salon.waitabit" = "Wait a bit";
+"Demo.TRTC.Salon.audienceconfirm" = "OK";
+"Demo.TRTC.Salon.waitabit" = "Cancel";
 "Demo.TRTC.Salon.micmuted" = "Mic off";
 "Demo.TRTC.Salon.micunmuted" = "Mic on";
 "Demo.TRTC.Salon.seatlistnotinit" = "The seat list has not been initialized.";
@@ -55,7 +55,7 @@
 "Demo.TRTC.Salon.leavequietly" = "Leave quietly";
 "Demo.TRTC.LiveRoom.confirm" = "OK";
 "Demo.TRTC.LiveRoom.cancel" = "Cancel";
-"Demo.TRTC.Salon.wanttoendroom" = "you want to end the room?";
+"Demo.TRTC.Salon.wanttoendroom" = "The room will close after you leave. Leave?";
 "Demo.TRTC.Salon.seatmuted" = "Muted by room owner";
 "Demo.TRTC.Salon.seatunmuted" = "Unmuted by room owner";
 "Demo.TRTC.Salon.pleaseselect" = "Please Select";

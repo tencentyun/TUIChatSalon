@@ -21,7 +21,7 @@ PODS:
 
 DEPENDENCIES:
   - TUIChatSalon/TRTC (from `./`)
-  - TXAppBasic (from `TXAppBasic/`)
+  - TXAppBasic (from `../TXAppBasic/`)
   - TXLiteAVSDK_TRTC
 
 SPEC REPOS:
@@ -39,7 +39,7 @@ EXTERNAL SOURCES:
   TUIChatSalon:
     :path: "./"
   TXAppBasic:
-    :path: TXAppBasic/
+    :path: "../TXAppBasic/"
 
 SPEC CHECKSUMS:
   Alamofire: f3b09a368f1582ab751b3fff5460276e0d2cf5c9
@@ -53,6 +53,6 @@ SPEC CHECKSUMS:
   TXIMSDK_Plus_iOS: 4b7c1097ea9899f7bf95fa90e2cb4471389f93dd
   TXLiteAVSDK_TRTC: afb4dfb50cf544505c748760fc97355e6927faec
 
-PODFILE CHECKSUM: b16f458221ba3514491a40ab149cf0ba5c84994f
+PODFILE CHECKSUM: 380bd301d37c55d8c0f0d432f97784848b9d33a2
 
 COCOAPODS: 1.11.2
