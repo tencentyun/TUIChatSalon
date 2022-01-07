@@ -15,10 +15,10 @@
     <string name="trtcchatsalon_already_anchor">you are the anchor</string>
     <string name="trtcchatsalon_room_not_ready">The room is loading</string>
     <string name="trtcchatsalon_room_destroy">The host has closed the room</string>
-    <string name="trtcchatsalon_already_open_mic">The microphone is turned on</string>
-    <string name="trtcchatsalon_already_close_mic">The microphone is turned off</string>
+    <string name="trtcchatsalon_already_open_mic">Mic on</string>
+    <string name="trtcchatsalon_already_close_mic">Mic off</string>
     <string name="trtcchatsalon_anchor_permission">Only the host can operate</string>
-    <string name="trtcchatsalon_btn_cancel">Wait a bit</string>
+    <string name="trtcchatsalon_btn_cancel">Cancel</string>
     <string name="trtcchatsalon_btn_confirm">Confirm</string>
     <string name="trtcchatsalon_hand_up_list">Raised hands</string>
     <string name="trtcchatsalon_room_title">default room topic</string>
