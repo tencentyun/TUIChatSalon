@@ -19,7 +19,7 @@
     <string name="trtcchatsalon_already_close_mic">您已关闭麦克风</string>
     <string name="trtcchatsalon_anchor_permission">主播才能操作</string>
     <string name="trtcchatsalon_btn_confirm">确认</string>
-    <string name="trtcchatsalon_btn_cancel">再等等</string>
+    <string name="trtcchatsalon_btn_cancel">取消</string>
     <string name="trtcchatsalon_hand_up_list">举手列表</string>
     <string name="trtcchatsalon_room_title">默认房间名称</string>
     <string name="trtcchatsalon_room_username">默认用户名</string>
