@@ -5,8 +5,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
@@ -20,6 +22,7 @@ import android.widget.TextView;
 
 import com.blankj.utilcode.util.ToastUtils;
 import com.tencent.imsdk.v2.V2TIMGroupInfoResult;
+import com.tencent.liteav.basic.IntentUtils;
 import com.tencent.liteav.basic.UserModel;
 import com.tencent.liteav.basic.UserModelManager;
 import com.tencent.liteav.debug.GenerateTestUserSig;
@@ -33,11 +36,11 @@ import com.tencent.trtc.TRTCCloudDef;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
 
-    private Toolbar         mToolbar;
-    private EditText        mEditRoomId;
-    private TextView        mTextEnterRoom;
-    private TRTCChatSalon    mTRTCChatSalon;
-    private RelativeLayout  mButtonCreateRoom;
+    private Toolbar        mToolbar;
+    private EditText       mEditRoomId;
+    private TextView       mTextEnterRoom;
+    private TRTCChatSalon  mTRTCChatSalon;
+    private RelativeLayout mButtonCreateRoom;
 
     private TextWatcher mEditTextWatcher = new TextWatcher() {
         @Override
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_VIEW);
                 intent.setData(Uri.parse("https://cloud.tencent.com/document/product/647/53537"));
-                startActivity(intent);
+                IntentUtils.safeStartActivity(MainActivity.this, intent);
             }
         });
 
@@ -113,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         mTRTCChatSalon.login(GenerateTestUserSig.SDKAPPID, userModel.userId, userModel.userSig, new TRTCChatSalonCallback.ActionCallback() {
             @Override
             public void onCallback(int code, String msg) {
-                Log.d(TAG, "code: "+code + " msg:"+msg);
+                Log.d(TAG, "code: " + code + " msg:" + msg);
                 mTRTCChatSalon.setSelfProfile(userModel.userName, userModel.userAvatar, new TRTCChatSalonCallback.ActionCallback() {
                     @Override
                     public void onCallback(int code, String msg) {

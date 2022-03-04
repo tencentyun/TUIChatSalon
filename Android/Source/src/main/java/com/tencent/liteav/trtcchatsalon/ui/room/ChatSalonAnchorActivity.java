@@ -24,8 +24,8 @@ import com.tencent.trtc.TRTCCloudDef;
 import java.util.List;
 
 public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
-    public static final int ERROR_ROOM_ID_EXIT = -1301;
-    private boolean mIsEnterRoom;
+    public static final int     ERROR_ROOM_ID_EXIT = -1301;
+    private             boolean mIsEnterRoom;
 
     /**
      * 创建房间
@@ -174,6 +174,9 @@ public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
     }
 
     private void onHandUpListBtnClick() {
+        if (isFinishing()) {
+            return;
+        }
         if (mHandUpListDialog == null) {
             mHandUpListDialog = new HandUpListDialog(mContext);
             mHandUpListDialog.setList(mRequestSpeakMembers);
@@ -190,7 +193,7 @@ public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
 
     private void onAgreeInvite(final ChatSalonMemberEntity memberEntity) {
         if (memberEntity != null) {
-           final String inviteId = memberEntity.invitedId;
+            final String inviteId = memberEntity.invitedId;
             if (inviteId == null) {
                 ToastUtils.showLong(R.string.trtcchatsalon_request_expired);
                 return;
@@ -223,6 +226,9 @@ public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
     }
 
     private void kickUser(final String userId) {
+        if (isFinishing()) {
+            return;
+        }
         final CommonBottomDialog dialog = new CommonBottomDialog(this);
         dialog.setButton(new CommonBottomDialog.OnButtonClickListener() {
             @Override
@@ -268,7 +274,7 @@ public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
     @Override
     public void onReceiveNewInvitation(String id, String inviter, String cmd, String content) {
         super.onReceiveNewInvitation(id, inviter, cmd, content);
-        Log.d(TAG, "onReceiveNewInvitation id:"+id+" inviter：" + inviter + " cmd：" + " content:" + content);
+        Log.d(TAG, "onReceiveNewInvitation id:" + id + " inviter：" + inviter + " cmd：" + " content:" + content);
         if (cmd.equals(TCConstants.CMD_REQUEST_TAKE_SEAT)) {
             receiveTakeSeat(id, inviter, content);
         }
