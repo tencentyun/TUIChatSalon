@@ -556,6 +556,13 @@ extension TRTCChatSalonRootView: TRTCChatSalonViewResponder {
     func recoveryVoiceSetting() {
     }
     
+    func showExitTip() {
+        self.makeToast(String.leaveRoomText, duration: 15.0, position: .center)
+    }
+    
+    func dismissTip() {
+        self.hideToast()
+    }
     
     func audienceListRefresh() {
         seatCollection.reloadData()
@@ -670,6 +677,8 @@ fileprivate extension String {
     static let alertAudienceTitle = ChatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
     static let alertAudienceConfirm = ChatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
     static let alertAudienceCancel = ChatSalonLocalize("Demo.TRTC.Salon.waitabit")
+    static let leaveRoomText = ChatSalonLocalize("Demo.TRTC.Salon.leave")
+
 }
 
 fileprivate extension UIColor {
