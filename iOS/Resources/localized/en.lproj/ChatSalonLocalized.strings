@@ -62,4 +62,3 @@
 "Demo.TRTC.Buy.chatroom" = "The number of chat rooms created has reached the maximum. Please go to the Tencent Cloud website (xxx) to enable **IM Audio-Video Chat Room** for your account.";
 "Demo.TRTC.Buy.grouplimit" = "The number of groups a user is allowed to create and join has exceeded the limit. Please purchase a package. For pricing details, see xxx.";
 "Demo.TRTC.Buy.groupmemberlimit" = "The number of group members has exceeded the limit. Please purchase a package. For pricing details, see xxx.";
-"Demo.TRTC.Salon.leave" = "Leave The Room...";

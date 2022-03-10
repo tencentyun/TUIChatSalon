@@ -28,9 +28,6 @@ protocol TRTCChatSalonViewResponder: NSObject {
     func showAudioEffectView()
     func stopPlayBGM() // 停止播放音乐
     func recoveryVoiceSetting() // 恢复音效设置
-    func showExitTip() //退出房间提示
-    func dismissTip()
-
 }
 
 class TRTCChatSalonViewModel: NSObject {
@@ -107,7 +104,8 @@ class TRTCChatSalonViewModel: NSObject {
             debugPrint("chatSalonUserInfo is nil")
             return
         }
-        self.viewResponder?.showExitTip()
+        
+        viewResponder?.popToPrevious()
         isExitingRoom = true
         if userId == roomInfo.ownerId && roomType == .anchor {
             dependencyContainer.destroyRoom(roomId: "\(roomInfo.roomID)") {
@@ -119,16 +117,12 @@ class TRTCChatSalonViewModel: NSObject {
             chatSalon.destroyRoom { [weak self] (code, message) in
                 guard let `self` = self else { return }
                 self.isExitingRoom = false
-                self.viewResponder?.dismissTip()
-                self.viewResponder?.popToPrevious()
             }
             return
         }
         chatSalon.exitRoom { [weak self] (code, message) in
             guard let `self` = self else { return }
             self.isExitingRoom = false
-            self.viewResponder?.dismissTip()
-            self.viewResponder?.popToPrevious()
         }
     }
     
