@@ -82,8 +82,8 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
         mAudienceList = new HashSet<>();
         mMuteMap = new HashMap<>();
         mInvitationMap = new HashMap<>();
-        ChatSalonTRTCService.getInstance().setDelegate(this);
         ChatSalonTRTCService.getInstance().init(context);
+        ChatSalonTRTCService.getInstance().setDelegate(this);
         TXRoomService.getInstance().init(context);
         TXRoomService.getInstance().setDelegate(this);
     }
