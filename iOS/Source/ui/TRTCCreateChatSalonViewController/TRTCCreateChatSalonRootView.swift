@@ -55,6 +55,9 @@ class TRTCCreateChatSalonRootView: UIView {
         textField.attributedPlaceholder = NSAttributedString.init(string: .topicPlaceholdText, attributes: [.font: UIFont.systemFont(ofSize: 16.0), .foregroundColor: UIColor.placeholderBackColor])
         textField.textColor = .black
         textField.font = UIFont.systemFont(ofSize: 16.0)
+#if RTCube_APPSTORE
+        textField.isUserInteractionEnabled = false
+#endif
         return textField
     }()
     
