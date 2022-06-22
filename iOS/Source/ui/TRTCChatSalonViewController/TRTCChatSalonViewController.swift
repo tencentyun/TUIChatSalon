@@ -3,10 +3,11 @@
 //  TRTCChatSalonDemo
 //
 //  Created by abyyxwang on 2020/6/8.
-//Copyright © 2020 tencent. All rights reserved.
+//  Copyright © 2020 tencent. All rights reserved.
 //
 import UIKit
 import TXAppBasic
+import TUICore
 
 protocol TRTCChatSalonViewModelFactory {
    func makeChatSalonViewModel(roomInfo: ChatSalonInfo, roomType: ChatSalonViewType) -> TRTCChatSalonViewModel
@@ -51,6 +52,24 @@ public class TRTCChatSalonViewController: UIViewController {
         } else {
             model.createRoom(toneQuality: toneQuality.rawValue)
         }
+#if RTCube_APPSTORE
+        if let appUtils = NSClassFromString("AppUtils") {
+            let selector = NSSelectorFromString("showAlertUserTips(:)")
+            if appUtils.responds(to: selector) {
+                appUtils.perform(selector, with: self, afterDelay: 0.25)
+            }
+        }
+        if viewModel?.isOwner == false {
+            let reportIcon = UIImage.init(named: "chatsalon_report", in: ChatSalonBundle(), compatibleWith: nil)
+            let reportItem = UIBarButtonItem(image: reportIcon?.withRenderingMode(.alwaysTemplate),
+                                             style: .done,
+                                             target: self,
+                                             action: #selector(reportAction))
+            reportItem.tintColor = .black
+            navigationItem.rightBarButtonItem = reportItem
+        }
+#endif
+        TUILogin.add(self)
     }
     
     public override func viewDidAppear(_ animated: Bool) {
@@ -73,6 +92,7 @@ public class TRTCChatSalonViewController: UIViewController {
     }
     
     deinit {
+        TUILogin.remove(self)
         TRTCLog.out("deinit \(type(of: self))")
     }
     
@@ -83,6 +103,40 @@ public class TRTCChatSalonViewController: UIViewController {
             self.viewModel?.exitRoom() // 主播销毁房间
         }
     }
+    
+    @objc
+    private func reportAction() {
+        let selector = NSSelectorFromString("showReportAlertWithRoomId:ownerId:")
+        if self.responds(to: selector) {
+            guard let roomInfo = viewModel?.roomInfo else { return }
+            self.perform(selector, with: roomInfo.roomID.description, with: roomInfo.ownerId)
+        }
+    }
+}
+
+// MARK: - TUILoginListener
+extension TRTCChatSalonViewController: TUILoginListener {
+    
+    public func onConnecting() {
+        
+    }
+    
+    public func onConnectSuccess() {
+        
+    }
+    
+    public func onConnectFailed(_ code: Int32, err: String!) {
+        
+    }
+    
+    public func onKickedOffline() {
+        viewModel?.exitRoom()
+    }
+    
+    public func onUserSigExpired() {
+        
+    }
+    
 }
 
 extension TRTCChatSalonViewController {

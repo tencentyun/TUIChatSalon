@@ -496,6 +496,13 @@ extension TRTCChatSalonViewModel: TRTCChatSalonDelegate {
         viewResponder?.showToast(message: .hostDestroyRoomText)
         chatSalon.exitRoom(callback: nil)
         viewResponder?.popToPrevious()
+#if RTCube_APPSTORE
+        guard isOwner else { return }
+        let selector = NSSelectorFromString("showAlertUserLiveTimeOut")
+        if UIViewController.responds(to: selector) {
+            UIViewController.perform(selector)
+        }
+#endif
     }
     
     public func onRoomInfoChange(roomInfo: ChatSalonInfo) {

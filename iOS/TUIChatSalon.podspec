@@ -3,11 +3,7 @@ Pod::Spec.new do |spec|
   spec.version      = '1.0.0'
   spec.platform     = :ios
   spec.ios.deployment_target = '11.0'
-  spec.license      = { :type => 'Proprietary',
-      :text => <<-LICENSE
-        copyright 2017 tencent Ltd. All rights reserved.
-        LICENSE
-       }
+  spec.license      = { :type => 'MIT', :file => 'LICENSE' }
   spec.homepage     = 'https://cloud.tencent.com/document/product/269/3794'
   spec.documentation_url = 'https://cloud.tencent.com/document/product/269/9147'
   spec.authors      = 'tencent video cloud'
@@ -22,7 +18,8 @@ Pod::Spec.new do |spec|
   spec.dependency 'Toast-Swift'
   spec.dependency 'Kingfisher', '<= 6.3.1'
   spec.dependency 'TXAppBasic'
-  spec.dependency 'TXIMSDK_Plus_iOS', '~> 5.7.1435'
+  spec.dependency 'TXIMSDK_Plus_iOS', '>= 5.7.1435'
+  spec.dependency 'TUICore'
   
   spec.requires_arc = true
   spec.static_framework = true
@@ -47,10 +44,6 @@ Pod::Spec.new do |spec|
  
   spec.subspec 'Enterprise' do |enterprise|
     enterprise.dependency 'TXLiteAVSDK_Enterprise'
-    framework_path="../../SDK/TXLiteAVSDK_Enterprise.framework"
-    enterprise.pod_target_xcconfig={
-        'HEADER_SEARCH_PATHS'=>["$(PODS_TARGET_SRCROOT)/#{framework_path}/Headers"]
-    }
     enterprise.source_files = 'Source/Localized/**/*.{h,m,mm,swift}', 'Source/model/**/*.{h,m,mm,swift}', 'Source/ui/**/*.{h,m,mm,swift}', 'Source/TUIChatSalonKit_Enterprise/*.{h,m,mm,swift}'
     enterprise.ios.framework = ['AVFoundation', 'Accelerate', 'AssetsLibrary']
     enterprise.library = 'c++', 'resolv', 'sqlite3'
@@ -59,6 +52,15 @@ Pod::Spec.new do |spec|
     }
   end
 
+  spec.subspec 'Professional' do |professional|
+    professional.dependency 'TXLiteAVSDK_Professional'
+    professional.source_files = 'Source/Localized/**/*.{h,m,mm,swift}', 'Source/model/**/*.{h,m,mm,swift}', 'Source/ui/**/*.{h,m,mm,swift}', 'Source/TUIChatSalonKit_Professional/*.{h,m,mm,swift}'
+    professional.ios.framework = ['AVFoundation', 'Accelerate', 'AssetsLibrary']
+    professional.library = 'c++', 'resolv', 'sqlite3'
+    professional.resource_bundles = {
+      'TUIChatSalonKitBundle' => ['Resources/localized/**/*.strings','Resources/*.xcassets']
+    }
+  end
   
 end
 

@@ -15,13 +15,13 @@
 	<key>CFBundlePackageType</key>
 	<string>$(PRODUCT_BUNDLE_PACKAGE_TYPE)</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>ChatSalonApp需要访问你的麦克风权限，开启后录制的视频才会有声音</string>
+	<string>10.2.0</string>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2443</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>ChatSalonApp需要访问你的麦克风权限，开启后录制的视频才会有声音</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
