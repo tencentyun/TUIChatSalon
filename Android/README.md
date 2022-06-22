@@ -4,9 +4,9 @@
 
 ```
 TUIChatSalon
-├─ App          // 主面板，各种场景入口
-├─ Debug        // 调试相关
-└─ Source       // 语音沙龙业务逻辑
+├─ app           // 主面板，各种场景入口
+├─ debug         // 调试相关
+└─ tuichatsalon  // 语音沙龙业务逻辑
 ```
 
 ## 环境准备
@@ -27,7 +27,7 @@ TUIChatSalon
 
 ### 配置工程文件
 1. 使用 Android Studio（3.5及以上的版本）打开源码工程`TUIChatSalon `。
-2. 找到并打开`TUIChatSalon/Debug/src/main/java/com/tencent/liteav/debug/GenerateTestUserSig.java`文件。
+2. 找到并打开`TUIChatSalon/debug/src/main/java/com/tencent/liteav/debug/GenerateTestUserSig.java`文件。
 3. 设置`GenerateTestUserSig.java`文件中的相关参数：
 <ul style="margin:0"><li/>SDKAPPID：默认为占位符（PLACEHOLDER），请设置为实际的 SDKAppID。
 <li/>SECRETKEY：默认为占位符（PLACEHOLDER），请设置为实际的密钥信息。</ul>
@@ -45,7 +45,7 @@ TUIChatSalon
 
 #### 方法一：自动加载（aar）
 实时音视频（TRTC） SDK 已经发布到 JCenter 库，您可以通过配置 gradle 自动下载更新。
-只需要用 Android Studio 打开需要集成 SDK 的工程，然后通过简单的三个步骤修改 App/build.gradle 文件，就可以完成 SDK 集成：
+只需要用 Android Studio 打开需要集成 SDK 的工程，然后通过简单的三个步骤修改 app/build.gradle 文件，就可以完成 SDK 集成：
 
 1. 在 dependencies 中添加 SDK 的依赖。
   - 若使用3.x版本的 com.android.tools.build:gradle 工具，请执行以下命令：
@@ -81,7 +81,7 @@ defaultConfig {
 如果您的网络连接 JCenter 有问题，您也可以手动下载 SDK 集成到工程里：
 
 1. 下载最新版本 [实时音视频 SDK](https://liteav.sdk.qcloud.com/download/latest/TXLiteAVSDK_TRTC_Android_latest.zip)。
-2. 将下载到的 aar 文件拷贝到工程的 **App/libs** 目录下。
+2. 将下载到的 aar 文件拷贝到工程的 **app/libs** 目录下。
 3. 在工程根目录下的 build.gradle 中，添加 **flatDir**，指定本地仓库路径。
 
 ```
@@ -89,13 +89,13 @@ allprojects {
     repositories {
         flatDir {
             dirs 'libs'
-            dirs project(':App').file('libs')
+            dirs project(':app').file('libs')
         }
     }
 }
 ```
 
-4. 在 App/build.gradle 中，添加引用 aar 包的代码。
+4. 在 app/build.gradle 中，添加引用 aar 包的代码。
 
 ```
 dependencies {
@@ -103,7 +103,7 @@ dependencies {
 }
 ```
 
-5. 在 App/build.gradle的defaultConfig 中，指定 App 使用的 CPU 架构。
+5. 在 app/build.gradle的defaultConfig 中，指定 App 使用的 CPU 架构。
 
 ```
 defaultConfig {
