@@ -8,7 +8,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.blankj.utilcode.util.ToastUtils;
-import com.tencent.liteav.debug.BuildConfig;
+import com.tencent.liteav.basic.RTCubeUtils;
 import com.tencent.liteav.trtcchatsalon.R;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalonCallback;
 import com.tencent.liteav.trtcchatsalon.model.TRTCChatSalonDef;
@@ -102,7 +102,7 @@ public class ChatSalonAudienceActivity extends ChatSalonBaseActivity {
             }
         });
         TUILogin.addLoginListener(mTUILoginListener);
-        mBtnReport.setVisibility(BuildConfig.RTCube_APPSTORE ? View.VISIBLE : View.GONE);
+        mBtnReport.setVisibility(RTCubeUtils.isRTCubeApp(this) ? View.VISIBLE : View.GONE);
         mBtnReport.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
