@@ -77,5 +77,5 @@ public class TRTCCreateChatSalonViewModel {
 }
 
 fileprivate extension String {
-    static let salonRoomNameSuffix = ChatSalonLocalize("Demo.TRTC.Salon.xxsroom")
+    static let salonRoomNameSuffix = chatSalonLocalize("Demo.TRTC.Salon.xxsroom")
 }

@@ -51,7 +51,7 @@ class TRTCChatSalonViewModel: NSObject {
     private(set) var mSelfSeatIndex: Int = -1
     private(set) var isOwnerMute: Bool = false
     /// 是否是房主
-    public var isOwner: Bool {
+    var isOwner: Bool {
         guard let userID = dependencyContainer.chatSalonUserInfo?.userID else {
             debugPrint("chatSalonUserInfo is nil")
             return false
@@ -743,28 +743,28 @@ extension TRTCChatSalonViewModel: TRTCChatSalonDelegate {
 }
 
 fileprivate extension String {
-    static let closedMicText = ChatSalonLocalize("Demo.TRTC.Salon.micmuted")
-    static let openedMicText = ChatSalonLocalize("Demo.TRTC.Salon.micunmuted")
-    static let micInitNotReadyText = ChatSalonLocalize("Demo.TRTC.Salon.seatlistnotinit")
-    static let enterRoomSuccText = ChatSalonLocalize("Demo.TRTC.Salon.enterroomsuccess")
-    static let enterRoomFailText = ChatSalonLocalize("Demo.TRTC.Salon.enterroomfailed")
-    static let createRoomFailedText = ChatSalonLocalize("Demo.TRTC.LiveRoom.createroomfailed")
-    static let alreadyIsAnchorText = ChatSalonLocalize("Demo.TRTC.Salon.isbeingarchon")
-    static let roomNotReadyText = ChatSalonLocalize("Demo.TRTC.Salon.roomnotready")
-    static let waitHostAcceptText = ChatSalonLocalize("Demo.TRTC.Salon.waitinghostconsent")
-    static let takeSeatSendFailed = ChatSalonLocalize("Demo.TRTC.Salon.failedsenthandupmessage")
-    static let masterOnSeatSuccess = ChatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatsuccess")
-    static let masterOnSeatFailed = ChatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatfailed")
-    static let onlyAnchorUse = ChatSalonLocalize("Demo.TRTC.LiveRoom.onlyanchorcanoperation")
-    static let kickOutMicText = ChatSalonLocalize("Demo.TRTC.Salon.movetotheaudience")
-    static let inviatttionTimeoutText = ChatSalonLocalize("Demo.TRTC.Salon.reqisexpired")
-    static let acceptInvitationFailed = ChatSalonLocalize("Demo.TRTC.Salon.acceptreqfailed")
-    static let leaveSeatSuccText = ChatSalonLocalize("Demo.TRTC.Salon.audiencesuccess")
-    static let leaveSeatFailedText = ChatSalonLocalize("Demo.TRTC.Salon.failedaudience")
-    static let hostDestroyRoomText = ChatSalonLocalize("Demo.TRTC.Salon.archonclosedroom")
-    static let enterSeatText = ChatSalonLocalize("Demo.TRTC.Salon.handsup")
-    static let leaveSeatText = ChatSalonLocalize("Demo.TRTC.Salon.audience")
-    static let enterSeatSuccessText = ChatSalonLocalize("Demo.TRTC.Salon.successbecomespaker")
-    static let enterSeatFailedText = ChatSalonLocalize("Demo.TRTC.Salon.failedbecomespaker")
-    static let inviteLimitedText = ChatSalonLocalize("Demo.TRTC.Salon.invitelimited")
+    static let closedMicText = chatSalonLocalize("Demo.TRTC.Salon.micmuted")
+    static let openedMicText = chatSalonLocalize("Demo.TRTC.Salon.micunmuted")
+    static let micInitNotReadyText = chatSalonLocalize("Demo.TRTC.Salon.seatlistnotinit")
+    static let enterRoomSuccText = chatSalonLocalize("Demo.TRTC.Salon.enterroomsuccess")
+    static let enterRoomFailText = chatSalonLocalize("Demo.TRTC.Salon.enterroomfailed")
+    static let createRoomFailedText = chatSalonLocalize("Demo.TRTC.LiveRoom.createroomfailed")
+    static let alreadyIsAnchorText = chatSalonLocalize("Demo.TRTC.Salon.isbeingarchon")
+    static let roomNotReadyText = chatSalonLocalize("Demo.TRTC.Salon.roomnotready")
+    static let waitHostAcceptText = chatSalonLocalize("Demo.TRTC.Salon.waitinghostconsent")
+    static let takeSeatSendFailed = chatSalonLocalize("Demo.TRTC.Salon.failedsenthandupmessage")
+    static let masterOnSeatSuccess = chatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatsuccess")
+    static let masterOnSeatFailed = chatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatfailed")
+    static let onlyAnchorUse = chatSalonLocalize("Demo.TRTC.LiveRoom.onlyanchorcanoperation")
+    static let kickOutMicText = chatSalonLocalize("Demo.TRTC.Salon.movetotheaudience")
+    static let inviatttionTimeoutText = chatSalonLocalize("Demo.TRTC.Salon.reqisexpired")
+    static let acceptInvitationFailed = chatSalonLocalize("Demo.TRTC.Salon.acceptreqfailed")
+    static let leaveSeatSuccText = chatSalonLocalize("Demo.TRTC.Salon.audiencesuccess")
+    static let leaveSeatFailedText = chatSalonLocalize("Demo.TRTC.Salon.failedaudience")
+    static let hostDestroyRoomText = chatSalonLocalize("Demo.TRTC.Salon.archonclosedroom")
+    static let enterSeatText = chatSalonLocalize("Demo.TRTC.Salon.handsup")
+    static let leaveSeatText = chatSalonLocalize("Demo.TRTC.Salon.audience")
+    static let enterSeatSuccessText = chatSalonLocalize("Demo.TRTC.Salon.successbecomespaker")
+    static let enterSeatFailedText = chatSalonLocalize("Demo.TRTC.Salon.failedbecomespaker")
+    static let inviteLimitedText = chatSalonLocalize("Demo.TRTC.Salon.invitelimited")
 }

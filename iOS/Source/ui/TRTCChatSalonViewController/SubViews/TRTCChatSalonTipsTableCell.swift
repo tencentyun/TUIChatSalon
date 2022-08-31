@@ -141,5 +141,5 @@ class TRTCChatSalonTipsTableCell: UITableViewCell {
 }
 
 fileprivate extension String {
-    static let accept = ChatSalonLocalize("Demo.TRTC.LiveRoom.accept")
+    static let accept = chatSalonLocalize("Demo.TRTC.LiveRoom.accept")
 }

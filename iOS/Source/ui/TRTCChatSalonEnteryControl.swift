@@ -55,7 +55,7 @@ public class TRTCChatSalonEnteryControl: NSObject {
             return room
         }
         chatSalon = TRTCChatSalon.shared()
-        return chatSalon!
+        return chatSalon ?? TRTCChatSalon.shared()
     }
     /*
      在无需使用VoicRoom的场景，可以将单例对象销毁。

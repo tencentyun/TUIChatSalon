@@ -35,9 +35,9 @@ struct ChatSalonSeatInfoModel {
 
 /// 记录房间消息列表的Model
 struct CSMsgEntity {
-    public static let TYPE_NORMAL     = 0;
-    public static let TYPE_WAIT_AGREE = 1;
-    public static let TYPE_AGREED     = 2;
+    public static let TYPE_NORMAL     = 0
+    public static let TYPE_WAIT_AGREE = 1
+    public static let TYPE_AGREED     = 2
     
     let userID: String
     let userName: String
@@ -48,8 +48,8 @@ struct CSMsgEntity {
 
 /// 记录房间上麦申请的Model
 struct CSMemberRequestEntity {
-    public static let TYPE_WAIT_AGREE = 1;
-    public static let TYPE_AGREED     = 2;
+    public static let TYPE_WAIT_AGREE = 1
+    public static let TYPE_AGREED     = 2
     
     let userID: String
     var userInfo: ChatSalonUserInfo

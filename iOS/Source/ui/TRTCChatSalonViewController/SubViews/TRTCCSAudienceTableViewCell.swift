@@ -43,8 +43,8 @@ class TRTCCSAudienceTableViewCell: UITableViewCell {
     
     let inviateButton: UIButton = {
         let button = UIButton.init(type: .custom)
-        button.setBackgroundImage(UIImage.init(named: "chatsalon_add_mic", in: ChatSalonBundle(), compatibleWith: nil), for: .normal)
-        button.setBackgroundImage(UIImage.init(named: "chatsalon_added_mic", in: ChatSalonBundle(), compatibleWith: nil), for: .selected)
+        button.setBackgroundImage(UIImage.init(named: "chatsalon_add_mic", in: chatSalonBundle(), compatibleWith: nil), for: .normal)
+        button.setBackgroundImage(UIImage.init(named: "chatsalon_added_mic", in: chatSalonBundle(), compatibleWith: nil), for: .selected)
         button.clipsToBounds = true
         button.layer.cornerRadius = 15
         return button
@@ -83,7 +83,7 @@ class TRTCCSAudienceTableViewCell: UITableViewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         model = nil
-        iconView.image = UIImage.init(named: "voiceroom_placeholder_avatar", in: ChatSalonBundle(), compatibleWith: nil)
+        iconView.image = UIImage.init(named: "voiceroom_placeholder_avatar", in: chatSalonBundle(), compatibleWith: nil)
     }
     
     func activateConstraints() {
@@ -115,7 +115,7 @@ class TRTCCSAudienceTableViewCell: UITableViewCell {
     }
     
     func setCell(model: CSMemberRequestEntity) {
-        let placeholder = UIImage.init(named: "voiceroom_placeholder_avatar", in: ChatSalonBundle(), compatibleWith: nil)
+        let placeholder = UIImage.init(named: "voiceroom_placeholder_avatar", in: chatSalonBundle(), compatibleWith: nil)
         if let avatarUrl = URL.init(string: model.userInfo.userAvatar) {
             iconView.kf.setImage(with: .network(avatarUrl),placeholder: placeholder)
         } else {
@@ -128,5 +128,5 @@ class TRTCCSAudienceTableViewCell: UITableViewCell {
 }
 
 fileprivate extension String {
-    static let welcomeText = ChatSalonLocalize("Demo.TRTC.Salon.welcome")
+    static let welcomeText = chatSalonLocalize("Demo.TRTC.Salon.welcome")
 }
