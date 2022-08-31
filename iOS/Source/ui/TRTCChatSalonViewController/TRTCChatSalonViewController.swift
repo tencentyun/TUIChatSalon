@@ -22,7 +22,8 @@ public class TRTCChatSalonViewController: UIViewController {
     var viewModel: TRTCChatSalonViewModel?
     let toneQuality: ChatSalonToneQuality
     // MARK: - Methods:
-    init(viewModelFactory: TRTCChatSalonViewModelFactory, roomInfo: ChatSalonInfo, role: ChatSalonViewType, toneQuality: ChatSalonToneQuality = .music) {
+    init(viewModelFactory: TRTCChatSalonViewModelFactory, roomInfo: ChatSalonInfo, role: ChatSalonViewType, toneQuality:
+     ChatSalonToneQuality = .music) {
         self.viewModelFactory = viewModelFactory
         self.roomInfo = roomInfo
         self.role = role
@@ -40,7 +41,7 @@ public class TRTCChatSalonViewController: UIViewController {
         title = "\(roomInfo.roomName)\(roomInfo.roomID)"
         
         let backBtn = UIButton(type: .custom)
-        backBtn.setImage(UIImage.init(named: "navigationbar_back", in: ChatSalonBundle(), compatibleWith: nil), for: .normal)
+        backBtn.setImage(UIImage.init(named: "navigationbar_back", in: chatSalonBundle(), compatibleWith: nil), for: .normal)
         backBtn.addTarget(self, action: #selector(cancel), for: .touchUpInside)
         backBtn.sizeToFit()
         let backItem = UIBarButtonItem(customView: backBtn)
@@ -60,7 +61,7 @@ public class TRTCChatSalonViewController: UIViewController {
             }
         }
         if viewModel?.isOwner == false {
-            let reportIcon = UIImage.init(named: "chatsalon_report", in: ChatSalonBundle(), compatibleWith: nil)
+            let reportIcon = UIImage.init(named: "chatsalon_report", in: chatSalonBundle(), compatibleWith: nil)
             let reportItem = UIBarButtonItem(image: reportIcon?.withRenderingMode(.alwaysTemplate),
                                              style: .done,
                                              target: self,
@@ -156,11 +157,11 @@ extension TRTCChatSalonViewController {
 }
 
 private extension String {
-    static let controllerTitle = ChatSalonLocalize("Demo.TRTC.Salon.roomid")
-    static let anchorAlertTitle = ChatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
-    static let audienceAlertTitle = ChatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
-    static let alertConfirm = ChatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
-    static let alertCancel = ChatSalonLocalize("Demo.TRTC.Salon.waitabit")
+    static let controllerTitle = chatSalonLocalize("Demo.TRTC.Salon.roomid")
+    static let anchorAlertTitle = chatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
+    static let audienceAlertTitle = chatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
+    static let alertConfirm = chatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
+    static let alertCancel = chatSalonLocalize("Demo.TRTC.Salon.waitabit")
 }
 
 

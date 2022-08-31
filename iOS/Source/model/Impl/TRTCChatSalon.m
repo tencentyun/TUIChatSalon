@@ -45,8 +45,8 @@
 
 @implementation TRTCChatSalon
 
-static TRTCChatSalon *_instance;
-static dispatch_once_t onceToken;
+static TRTCChatSalon *gInstance;
+static dispatch_once_t gOnceToken;
 
 - (instancetype)init
 {
@@ -165,10 +165,12 @@ static dispatch_once_t onceToken;
     }];
 }
 
-- (void)enterTRTCRoomInnerWithRoomId:(NSString *)roomId userID:(NSString *)userID userSign:(NSString *)userSig role:(NSInteger)role callback:(ActionCallback)callback {
+- (void)enterTRTCRoomInnerWithRoomId:(NSString *)roomId userID:(NSString *)userID
+ userSign:(NSString *)userSig role:(NSInteger)role callback:(ActionCallback)callback {
     TRTCLog(@"start enter trtc room.");
     @weakify(self)
-    [self.roomTRTCService enterRoomWithSdkAppId:self.mSDKAppID roomId:roomId userID:userID userSign:userSig role:role callback:^(int code, NSString * _Nonnull message) {
+    [self.roomTRTCService enterRoomWithSdkAppId:self.mSDKAppID roomId:roomId userID:userID
+     userSign:userSig role:role callback:^(int code, NSString * _Nonnull message) {
         @strongify(self)
         if (!self) {
             return;
@@ -183,17 +185,17 @@ static dispatch_once_t onceToken;
 
 #pragma mark - TRTCChatSalon 实现
 + (instancetype)sharedInstance {
-    dispatch_once(&onceToken, ^{
-        _instance = [[TRTCChatSalon alloc] init];
-        [TXChatSalonService sharedInstance].delegate = _instance;
-        [ChatSalonTRTCService sharedInstance].delegate = _instance;
+    dispatch_once(&gOnceToken, ^{
+        gInstance = [[TRTCChatSalon alloc] init];
+        [TXChatSalonService sharedInstance].delegate = gInstance;
+        [ChatSalonTRTCService sharedInstance].delegate = gInstance;
     });
-    return _instance;
+    return gInstance;
 }
 
 + (void)destroySharedInstance {
-    onceToken = 0;
-    _instance = nil;
+    gOnceToken = 0;
+    gInstance = nil;
 }
 
 - (void)setDelegate:(id<TRTCChatSalonDelegate>)delegate{
@@ -304,7 +306,8 @@ static dispatch_once_t onceToken;
                 return;
             }
             if (code == 0) {
-                [self enterTRTCRoomInnerWithRoomId:self.roomID userID:self.userID userSign:self.userSig role:kTRTCRoleAnchorValue callback:^(int code, NSString * _Nonnull message) {
+                [self enterTRTCRoomInnerWithRoomId:self.roomID userID:self.userID userSign:self.userSig
+                 role:KTRTCRoleAnchorValue callback:^(int code, NSString * _Nonnull message) {
                     [self.roomTRTCService switchToAnchor:^(int code, NSString * _Nonnull message) {
                         if (code == 0) {
                             [self.roomService onSeatTakeWithUser:self.userID];
@@ -390,7 +393,8 @@ static dispatch_once_t onceToken;
                     }
                 }];
             } else {
-                [self enterTRTCRoomInnerWithRoomId:self.roomID userID:self.userID userSign:self.userSig role:kTRTCRoleAudienceValue callback:^(int code, NSString * _Nonnull message) {
+                [self enterTRTCRoomInnerWithRoomId:self.roomID userID:self.userID userSign:self.userSig
+                 role:KTRTCRoleAudienceValue callback:^(int code, NSString * _Nonnull message) {
                     @strongify(self)
                     if (!self) {
                         return;
@@ -440,7 +444,8 @@ static dispatch_once_t onceToken;
         for (NSNumber *roomId in roomIdList) {
             [roomIds addObject:[roomId stringValue]];
         }
-        [self.roomService getRoomInfoList:roomIds calback:^(int code, NSString * _Nonnull message, NSArray<TXChatSalonRoomInfo *> * _Nonnull roomInfos) {
+        [self.roomService getRoomInfoList:roomIds calback:^(int code, NSString * _Nonnull message,
+         NSArray<TXChatSalonRoomInfo *> * _Nonnull roomInfos) {
             if (code == 0) {
                 TRTCLog(@"roomInfos: %@", roomInfos);
                 NSMutableArray* trtcRoomInfos = [[NSMutableArray alloc] initWithCapacity:2];
@@ -480,7 +485,8 @@ static dispatch_once_t onceToken;
             [self getAudienceList:callback];
             return;
         }
-        [self.roomService getUserInfo:userIDList callback:^(int code, NSString * _Nonnull message, NSArray<TXChatSalonUserInfo *> * _Nonnull userInfos) {
+        [self.roomService getUserInfo:userIDList callback:^(int code, NSString * _Nonnull message,
+         NSArray<TXChatSalonUserInfo *> * _Nonnull userInfos) {
             @strongify(self)
             if (!self) {
                 return;
@@ -581,7 +587,7 @@ static dispatch_once_t onceToken;
         if ([self isOnSeatWithUserId:userID]) {
             [self runOnDelegateQueue:^{
                 if (callback) {
-                    callback(-1, ChatSalonLocalize(@"Demo.TRTC.Salon.userisspeaker"));
+                    callback(-1, chatSalonLocalize(@"Demo.TRTC.Salon.userisspeaker"));
                 }
             }];
             return;

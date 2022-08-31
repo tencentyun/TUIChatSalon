@@ -81,7 +81,8 @@ class TRTCChatSalonRootView: UIView {
         
         let collectionView = UICollectionView.init(frame: .zero, collectionViewLayout: layout)
         collectionView.register(TRTCChatSalonSeatCell.self, forCellWithReuseIdentifier: "TRTCChatSalonSeatCell")
-        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "ChatSalon.HeaderView")
+        collectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+         withReuseIdentifier: "ChatSalon.HeaderView")
         collectionView.backgroundColor = .clear
         return collectionView
     }()
@@ -101,7 +102,7 @@ class TRTCChatSalonRootView: UIView {
     let leaveButton: UIButton = {
         let button = UIButton.init(frame: .zero)
         button.setTitle(.leaveText, for: .normal)
-        button.setBackgroundImage(UIColor(hex: "F4F5F9")!.trans2Image(), for: .normal)
+        button.setBackgroundImage(UIColor(hex: "F4F5F9").trans2Image(), for: .normal)
         button.setTitleColor(UIColor(hex: "FA585E"), for: .normal)
         button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
@@ -209,7 +210,8 @@ class TRTCChatSalonRootView: UIView {
 
 // MARK: - collection view delegate
 extension TRTCChatSalonRootView: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout:
+     UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if (indexPath.section == 0) {
             return CGSize(width: 80, height: 112)
         } else {
@@ -217,15 +219,18 @@ extension TRTCChatSalonRootView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt
+     section: Int) -> UIEdgeInsets {
         return UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+     minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 30
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+     minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         if (section == 0) {
             return (UIScreen.main.bounds.width - 40 - 80 * 3) / 2.0
         } else {
@@ -246,7 +251,8 @@ extension TRTCChatSalonRootView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) ->
+     UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader {
             let view = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader,
                                                                          withReuseIdentifier: "ChatSalon.HeaderView",
@@ -260,14 +266,15 @@ extension TRTCChatSalonRootView: UICollectionViewDelegateFlowLayout {
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,
+     referenceSizeForHeaderInSection section: Int) -> CGSize {
         return CGSize.init(width: UIScreen.main.bounds.width, height: 30)
     }
 }
 
 extension TRTCChatSalonRootView: UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2;
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -394,14 +401,16 @@ extension TRTCChatSalonRootView {
             let _ = viewModel.muteAction(isMute: muteButton.isSelected) // 返回值为false说明无法调整麦克风
         case leaveButton:
             if viewModel.roomType == .anchor && viewModel.isOwner {
-                showAlert(info: (title: "", message: .ownerExitMsg), actionTitle: (sure: .sureActionTitle, cancel: .cancelActionTitle)) { [weak self] in
+                showAlert(info: (title: "", message: .ownerExitMsg), actionTitle: (sure: .sureActionTitle, cancel: .cancelActionTitle)) {
+                 [weak self] in
                     guard let `self` = self else { return }
                     self.viewModel.exitRoom() // 主播销毁房间
                 } cancelAction: {
                    
                 }
             } else {
-                showAlert(info: (title: "", message: .alertAudienceTitle), actionTitle: (sure: .alertAudienceConfirm, cancel: .alertAudienceCancel)) { [weak self] in
+                showAlert(info: (title: "", message: .alertAudienceTitle), actionTitle: (sure: .alertAudienceConfirm, cancel:
+                 .alertAudienceCancel)) { [weak self] in
                     guard let `self` = self else { return }
                     self.viewModel.exitRoom()
                 } cancelAction: {
@@ -662,22 +671,22 @@ extension TRTCChatSalonRootView: TRTCChatSalonViewResponder {
 
 /// MARK: - internationalization string
 fileprivate extension String {
-    static let anchorHeaderText = ChatSalonLocalize("Demo.TRTC.Salon.anchor")
-    static let audienceHeaderText = ChatSalonLocalize("Demo.TRTC.Salon.audiences")
-    static let leaveText = ChatSalonLocalize("Demo.TRTC.Salon.leavequietly")
-    static let sureActionTitle = ChatSalonLocalize("Demo.TRTC.LiveRoom.confirm")
-    static let cancelActionTitle = ChatSalonLocalize("Demo.TRTC.LiveRoom.cancel")
-    static let acceptTitle = ChatSalonLocalize("Demo.TRTC.Salon.welcome")
-    static let refuseTitle = ChatSalonLocalize("Demo.TRTC.Salon.dismiss")
-    static let ownerExitMsg = ChatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
-    static let seatMute = ChatSalonLocalize("Demo.TRTC.Salon.seatmuted")
-    static let seatUnmute = ChatSalonLocalize("Demo.TRTC.Salon.seatunmuted")
-    static let chooseTitle = ChatSalonLocalize("Demo.TRTC.Salon.pleaseselect")
+    static let anchorHeaderText = chatSalonLocalize("Demo.TRTC.Salon.anchor")
+    static let audienceHeaderText = chatSalonLocalize("Demo.TRTC.Salon.audiences")
+    static let leaveText = chatSalonLocalize("Demo.TRTC.Salon.leavequietly")
+    static let sureActionTitle = chatSalonLocalize("Demo.TRTC.LiveRoom.confirm")
+    static let cancelActionTitle = chatSalonLocalize("Demo.TRTC.LiveRoom.cancel")
+    static let acceptTitle = chatSalonLocalize("Demo.TRTC.Salon.welcome")
+    static let refuseTitle = chatSalonLocalize("Demo.TRTC.Salon.dismiss")
+    static let ownerExitMsg = chatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
+    static let seatMute = chatSalonLocalize("Demo.TRTC.Salon.seatmuted")
+    static let seatUnmute = chatSalonLocalize("Demo.TRTC.Salon.seatunmuted")
+    static let chooseTitle = chatSalonLocalize("Demo.TRTC.Salon.pleaseselect")
     
-    static let alertAudienceTitle = ChatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
-    static let alertAudienceConfirm = ChatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
-    static let alertAudienceCancel = ChatSalonLocalize("Demo.TRTC.Salon.waitabit")
-    static let leaveRoomText = ChatSalonLocalize("Demo.TRTC.Salon.leave")
+    static let alertAudienceTitle = chatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
+    static let alertAudienceConfirm = chatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
+    static let alertAudienceCancel = chatSalonLocalize("Demo.TRTC.Salon.waitabit")
+    static let leaveRoomText = chatSalonLocalize("Demo.TRTC.Salon.leave")
 
 }
 
@@ -687,12 +696,12 @@ fileprivate extension UIColor {
 }
 
 fileprivate extension UIImage {
-    static let anchorHeaderIcon = UIImage.init(named: "chatsalon_anchor", in: ChatSalonBundle(), compatibleWith: nil)
-    static let audienceHeaderIcon = UIImage.init(named: "chatsalon_audience",  in: ChatSalonBundle(), compatibleWith: nil)
-    static let micOff = UIImage.init(named: "chatsalon_mic_off", in: ChatSalonBundle(), compatibleWith: nil)
-    static let micOn = UIImage.init(named: "chatsalon_mic_on", in: ChatSalonBundle(), compatibleWith: nil)
-    static let leaveMic = UIImage.init(named: "chatsalon_leave_mic", in: ChatSalonBundle(), compatibleWith: nil)
-    static let handsup = UIImage.init(named: "chatsalon_handsup", in: ChatSalonBundle(), compatibleWith: nil)
-    static let handsupCancel = UIImage.init(named: "chatsalon_handsup_cancel", in: ChatSalonBundle(), compatibleWith: nil)
-    static let handsupList = UIImage.init(named: "chatsalon_handsup_list", in: ChatSalonBundle(), compatibleWith: nil)
+    static let anchorHeaderIcon = UIImage.init(named: "chatsalon_anchor", in: chatSalonBundle(), compatibleWith: nil)
+    static let audienceHeaderIcon = UIImage.init(named: "chatsalon_audience",  in: chatSalonBundle(), compatibleWith: nil)
+    static let micOff = UIImage.init(named: "chatsalon_mic_off", in: chatSalonBundle(), compatibleWith: nil)
+    static let micOn = UIImage.init(named: "chatsalon_mic_on", in: chatSalonBundle(), compatibleWith: nil)
+    static let leaveMic = UIImage.init(named: "chatsalon_leave_mic", in: chatSalonBundle(), compatibleWith: nil)
+    static let handsup = UIImage.init(named: "chatsalon_handsup", in: chatSalonBundle(), compatibleWith: nil)
+    static let handsupCancel = UIImage.init(named: "chatsalon_handsup_cancel", in: chatSalonBundle(), compatibleWith: nil)
+    static let handsupList = UIImage.init(named: "chatsalon_handsup_list", in: chatSalonBundle(), compatibleWith: nil)
 }

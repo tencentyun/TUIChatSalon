@@ -41,7 +41,7 @@ class TRTCChatSalonSeatView: UIView {
     let avatarImageView: UIImageView = {
         let imageView = UIImageView.init(frame: .zero)
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage.init(named: "voiceroom_placeholder_avatar", in: ChatSalonBundle(), compatibleWith: nil)
+        imageView.image = UIImage.init(named: "voiceroom_placeholder_avatar", in: chatSalonBundle(), compatibleWith: nil)
         imageView.layer.masksToBounds = true
         imageView.layer.cornerRadius = 25
         return imageView
@@ -60,7 +60,7 @@ class TRTCChatSalonSeatView: UIView {
     let muteImageView: UIImageView = {
         let imageView = UIImageView.init(frame: .zero)
         imageView.contentMode = .scaleAspectFit
-        imageView.image = UIImage.init(named: "chatsalon_mic_mute", in: ChatSalonBundle(), compatibleWith: nil)
+        imageView.image = UIImage.init(named: "chatsalon_mic_mute", in: chatSalonBundle(), compatibleWith: nil)
         imageView.isHidden = true
         return imageView
     }()
@@ -127,7 +127,7 @@ class TRTCChatSalonSeatView: UIView {
     func setSeatInfo(model: ChatSalonSeatInfoModel, showMute: Bool = false) {
         if model.isClosed {
             // close 状态
-            avatarImageView.image = UIImage.init(named: "voiceroom_seat_lock", in: ChatSalonBundle(), compatibleWith: nil)
+            avatarImageView.image = UIImage.init(named: "voiceroom_seat_lock", in: chatSalonBundle(), compatibleWith: nil)
             return
         }
         let isMute = model.seatInfo?.mute ?? false
@@ -139,7 +139,7 @@ class TRTCChatSalonSeatView: UIView {
         if model.isUsed {
             // 有人
             if let userSeatInfo = model.seatUser {
-                let placeholder = UIImage.init(named: "voiceroom_placeholder_avatar", in: ChatSalonBundle(), compatibleWith: nil)
+                let placeholder = UIImage.init(named: "voiceroom_placeholder_avatar", in: chatSalonBundle(), compatibleWith: nil)
                 if let url = URL.init(string: userSeatInfo.userAvatar) {
                     avatarImageView.kf.setImage(with: .network(url), placeholder: placeholder)
                 } else {
@@ -147,13 +147,13 @@ class TRTCChatSalonSeatView: UIView {
                 }
                 var masterIcon: UIImage? = nil
                 if model.isOwner {
-                    masterIcon = UIImage.init(named: "chatsalon_master", in: ChatSalonBundle(), compatibleWith: nil)
+                    masterIcon = UIImage.init(named: "chatsalon_master", in: chatSalonBundle(), compatibleWith: nil)
                 }
                 nameLabel.set(image:masterIcon, with: userSeatInfo.userName)
             }
         } else {
             // 无人
-            avatarImageView.image = UIImage.init(named: "voiceroom_placeholder_avatar", in: ChatSalonBundle(), compatibleWith: nil)
+            avatarImageView.image = UIImage.init(named: "voiceroom_placeholder_avatar", in: chatSalonBundle(), compatibleWith: nil)
         }
         
         // 绿色边框

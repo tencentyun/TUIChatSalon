@@ -107,7 +107,7 @@ class TRTCChatSalonMainMenuView: UIView {
             let offset = item.offset
             let button = item.element
             if disableIndex.contains(offset) {
-                button.isSelected = true;
+                button.isSelected = true
             }
         }
     }
@@ -118,7 +118,7 @@ class TRTCChatSalonMainMenuView: UIView {
             let offset = item.offset
             let button = item.element
             if disableIndex.contains(offset) {
-                button.isSelected = false;
+                button.isSelected = false
             }
         }
     }

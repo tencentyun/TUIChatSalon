@@ -15,7 +15,7 @@ class TRTCChatSalonHandsUpTipsView: UIView {
     private var isViewReady: Bool = false
     
     let handsImgView: UIImageView = {
-        let imgView = UIImageView(image: UIImage.init(named: "chatsalon_handsup_success", in: ChatSalonBundle(), compatibleWith: nil))
+        let imgView = UIImageView(image: UIImage.init(named: "chatsalon_handsup_success", in: chatSalonBundle(), compatibleWith: nil))
         imgView.contentMode = .scaleAspectFit
         
         return imgView
@@ -72,5 +72,5 @@ fileprivate extension UIColor {
 }
 
 fileprivate extension String {
-    static let successMsg = ChatSalonLocalize("Demo.TRTC.Salon.raisedhandandwaitmanageraccept")
+    static let successMsg = chatSalonLocalize("Demo.TRTC.Salon.raisedhandandwaitmanageraccept")
 }

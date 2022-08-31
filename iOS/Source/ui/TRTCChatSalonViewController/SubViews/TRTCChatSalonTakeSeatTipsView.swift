@@ -49,7 +49,9 @@ class TRTCChatSalonTakeSeatTipsView: UIView {
         let button = UIButton.init(frame: .zero)
         button.setTitle(.refuseText, for: .normal)
         button.setTitleColor(.black, for: .normal)
-        button.setBackgroundImage(UIColor(hex: "F4F5F9")!.trans2Image(), for: .normal)
+        if let color = UIColor(hex: "F4F5F9") {
+            button.setBackgroundImage(color.trans2Image(), for: .normal)
+        }
         button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
         return button
@@ -105,7 +107,7 @@ class TRTCChatSalonTakeSeatTipsView: UIView {
         case welcomeButton:
             viewModel.acceptTakeSeat(identifier: requestInfo.userID)
         case refuseButton:
-            break;
+            break
         default:
             break
         }
@@ -115,9 +117,9 @@ class TRTCChatSalonTakeSeatTipsView: UIView {
 
 
 fileprivate extension String {
-    static let welcomeText = ChatSalonLocalize("Demo.TRTC.Salon.welcome")
-    static let refuseText = ChatSalonLocalize("Demo.TRTC.Salon.dismiss")
-    static let takeSeatSuffix = ChatSalonLocalize("Demo.TRTC.Salon.appliestobecomeaspeaker")
+    static let welcomeText = chatSalonLocalize("Demo.TRTC.Salon.welcome")
+    static let refuseText = chatSalonLocalize("Demo.TRTC.Salon.dismiss")
+    static let takeSeatSuffix = chatSalonLocalize("Demo.TRTC.Salon.appliestobecomeaspeaker")
 }
 
 fileprivate extension UIColor {

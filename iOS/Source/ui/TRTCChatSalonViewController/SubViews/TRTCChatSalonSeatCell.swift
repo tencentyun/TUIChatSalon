@@ -41,7 +41,8 @@ class TRTCChatSalonSeatCell: UICollectionViewCell {
     }
     
     func setCell(audience: CSAudienceInfoModel) {
-        let seatInfo = ChatSalonSeatInfoModel.init(seatIndex: 0, isClosed: false, isUsed: true, isOwner: false, seatInfo: nil, seatUser: audience.userInfo) { (model) in
+        let seatInfo = ChatSalonSeatInfoModel.init(seatIndex: 0, isClosed: false, isUsed: true, isOwner: false, seatInfo: nil, seatUser:
+         audience.userInfo) { (model) in
             
         }
         seatView.setSeatInfo(model: seatInfo, showMute: false)
