@@ -28,14 +28,14 @@ public class TXRoomInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "TXRoomInfo{" +
-                "roomId='" + roomId + '\'' +
-                ", memberCount=" + memberCount +
-                ", ownerId='" + ownerId + '\'' +
-                ", ownerName='" + ownerName + '\'' +
-                ", roomName='" + roomName + '\'' +
-                ", cover='" + cover + '\'' +
-                ", needRequest=" + needRequest +
-                '}';
+        return "TXRoomInfo{"
+                + "roomId='" + roomId + '\''
+                + ", memberCount=" + memberCount
+                + ", ownerId='" + ownerId + '\''
+                + ", ownerName='" + ownerName + '\''
+                + ", roomName='" + roomName + '\''
+                + ", cover='" + cover + '\''
+                + ", needRequest=" + needRequest
+                + '}';
     }
 }

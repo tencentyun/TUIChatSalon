@@ -13,7 +13,7 @@ public class ChatSalonRoomManager {
     private static final String TAG = "ChatSalonRoomManager";
 
     private static ChatSalonRoomManager sInstance;
-    private RoomCallback mRoomCallback;
+    private        RoomCallback         mRoomCallback;
 
     public static ChatSalonRoomManager getInstance() {
         if (sInstance == null) {
@@ -49,11 +49,13 @@ public class ChatSalonRoomManager {
 
     public interface RoomCallback {
         void onRoomCreate(int roomId, ActionCallback callback);
+
         void onRoomDestroy(int roomId, ActionCallback callback);
     }
 
     public interface ActionCallback {
         void onSuccess();
+
         void onError(int errorCode, String message);
     }
 
@@ -64,7 +66,7 @@ public class ChatSalonRoomManager {
         V2TIMManager.getGroupManager().getGroupsInfo(roomIdList, new V2TIMValueCallback<List<V2TIMGroupInfoResult>>() {
             @Override
             public void onError(int i, String s) {
-                Log.e(TAG, "get group info list fail, code:" + i+ " msg: " + s);
+                Log.e(TAG, "get group info list fail, code:" + i + " msg: " + s);
                 callback.onFailed(-1, s);
             }
 
@@ -83,6 +85,7 @@ public class ChatSalonRoomManager {
     // 通过房间号获取房间信息的回调
     public interface GetGroupInfoCallback {
         void onSuccess(V2TIMGroupInfoResult result);
+
         void onFailed(int code, String msg);
     }
 }

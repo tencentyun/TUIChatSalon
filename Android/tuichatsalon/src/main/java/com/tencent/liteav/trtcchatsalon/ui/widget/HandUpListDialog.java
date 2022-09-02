@@ -2,10 +2,14 @@ package com.tencent.liteav.trtcchatsalon.ui.widget;
 
 import android.content.Context;
 import android.os.Bundle;
+
 import androidx.annotation.NonNull;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import android.text.TextUtils;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
@@ -23,11 +27,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class HandUpListDialog extends BottomSheetDialog {
-    private Context            mContext;
-    private RecyclerView       mRvList;
-    private ListAdapter        mListAdapter;
-    private onSelectedCallback mOnSelectedCallback;
-    private TextView           mTitle;
+    private Context                     mContext;
+    private RecyclerView                mRvList;
+    private ListAdapter                 mListAdapter;
+    private OnSelectedCallback          mOnSelectedCallback;
+    private TextView                    mTitle;
     private List<ChatSalonMemberEntity> mMemberEntityList;
 
     public HandUpListDialog(@NonNull Context context) {
@@ -58,7 +62,7 @@ public class HandUpListDialog extends BottomSheetDialog {
 
     }
 
-    public void setOnSelectedCallback(onSelectedCallback onSelectedCallback) {
+    public void setOnSelectedCallback(OnSelectedCallback onSelectedCallback) {
         mOnSelectedCallback = onSelectedCallback;
     }
 
@@ -88,15 +92,15 @@ public class HandUpListDialog extends BottomSheetDialog {
         }
     }
 
-    public interface onSelectedCallback {
+    public interface OnSelectedCallback {
         void onSelected(ChatSalonMemberEntity memberEntity);
     }
 
     public static class ListAdapter extends
             RecyclerView.Adapter<ListAdapter.ViewHolder> {
-        private Context             context;
-        private List<ChatSalonMemberEntity>  list;
-        private OnItemClickListener onItemClickListener;
+        private Context                     context;
+        private List<ChatSalonMemberEntity> list;
+        private OnItemClickListener         onItemClickListener;
 
         public ListAdapter(Context context, List<ChatSalonMemberEntity> list,
                            OnItemClickListener onItemClickListener) {
@@ -110,7 +114,7 @@ public class HandUpListDialog extends BottomSheetDialog {
 
         @Override
         public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            Context        context  = parent.getContext();
+            Context context = parent.getContext();
             LayoutInflater inflater = LayoutInflater.from(context);
 
             View view = inflater.inflate(R.layout.trtcchatsalon_item_hand_up, parent, false);
@@ -135,9 +139,9 @@ public class HandUpListDialog extends BottomSheetDialog {
         }
 
         class ViewHolder extends RecyclerView.ViewHolder {
-            private TextView  mUserNameTv;
+            private TextView    mUserNameTv;
             private ImageButton mButtonInvite;
-            private ImageView mImageAvatar;
+            private ImageView   mImageAvatar;
 
             ViewHolder(View itemView) {
                 super(itemView);

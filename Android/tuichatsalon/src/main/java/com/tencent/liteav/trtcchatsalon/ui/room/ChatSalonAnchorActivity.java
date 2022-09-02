@@ -181,7 +181,8 @@ public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
                 if (code == ERROR_ROOM_ID_EXIT) {
                     onSuccess();
                 } else {
-                    ToastUtils.showLong(getString(R.string.trtcchatsalon_create_room_failed) + "[" + code + "]:" + message);
+                    ToastUtils.showLong(getString(R.string.trtcchatsalon_create_room_failed)
+                            + "[" + code + "]:" + message);
                     finish();
                 }
             }
@@ -195,7 +196,7 @@ public class ChatSalonAnchorActivity extends ChatSalonBaseActivity {
         if (mHandUpListDialog == null) {
             mHandUpListDialog = new HandUpListDialog(mContext);
             mHandUpListDialog.setList(mRequestSpeakMembers);
-            mHandUpListDialog.setOnSelectedCallback(new HandUpListDialog.onSelectedCallback() {
+            mHandUpListDialog.setOnSelectedCallback(new HandUpListDialog.OnSelectedCallback() {
                 @Override
                 public void onSelected(ChatSalonMemberEntity memberEntity) {
                     onAgreeInvite(memberEntity);

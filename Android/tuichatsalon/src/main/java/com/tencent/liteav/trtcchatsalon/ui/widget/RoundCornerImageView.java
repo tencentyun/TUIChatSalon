@@ -4,7 +4,9 @@ import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Canvas;
 import android.graphics.Path;
+
 import androidx.appcompat.widget.AppCompatImageView;
+
 import android.util.AttributeSet;
 import android.view.View;
 
@@ -13,13 +15,14 @@ import com.tencent.liteav.trtcchatsalon.R;
 
 public class RoundCornerImageView extends AppCompatImageView {
 
-    private float mWidth, mHeight;
-    private int mDefaultRadius = 0;
-    private int mRadius;
-    private int mLeftTopRadius;
-    private int mRightTopRadius;
-    private int mRightBottomRadius;
-    private int mLeftBottomRadius;
+    private float mWidth;
+    private float mHeight;
+    private int   mDefaultRadius = 0;
+    private int   mRadius;
+    private int   mLeftTopRadius;
+    private int   mRightTopRadius;
+    private int   mRightBottomRadius;
+    private int   mLeftBottomRadius;
 
     public RoundCornerImageView(Context context) {
         this(context, null);
@@ -40,10 +43,14 @@ public class RoundCornerImageView extends AppCompatImageView {
         // 读取配置
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.TRTCChatSalonRoundCornerImageView);
         mRadius = array.getDimensionPixelOffset(R.styleable.TRTCChatSalonRoundCornerImageView_radius, mDefaultRadius);
-        mLeftTopRadius = array.getDimensionPixelOffset(R.styleable.TRTCChatSalonRoundCornerImageView_left_top_radius, mDefaultRadius);
-        mRightTopRadius = array.getDimensionPixelOffset(R.styleable.TRTCChatSalonRoundCornerImageView_right_top_radius, mDefaultRadius);
-        mRightBottomRadius = array.getDimensionPixelOffset(R.styleable.TRTCChatSalonRoundCornerImageView_right_bottom_radius, mDefaultRadius);
-        mLeftBottomRadius = array.getDimensionPixelOffset(R.styleable.TRTCChatSalonRoundCornerImageView_left_bottom_radius, mDefaultRadius);
+        mLeftTopRadius = array.getDimensionPixelOffset(R.styleable
+                .TRTCChatSalonRoundCornerImageView_left_top_radius, mDefaultRadius);
+        mRightTopRadius = array.getDimensionPixelOffset(R.styleable
+                .TRTCChatSalonRoundCornerImageView_right_top_radius, mDefaultRadius);
+        mRightBottomRadius = array.getDimensionPixelOffset(R.styleable
+                .TRTCChatSalonRoundCornerImageView_right_bottom_radius, mDefaultRadius);
+        mLeftBottomRadius = array.getDimensionPixelOffset(R.styleable
+                .TRTCChatSalonRoundCornerImageView_left_bottom_radius, mDefaultRadius);
 
         //如果四个角的值没有设置，那么就使用通用的radius的值。
         if (mDefaultRadius == mLeftTopRadius) {

@@ -1026,18 +1026,18 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
     }
 
     @Override
-    public void onRoomInfoChange(final TXRoomInfo tXRoomInfo) {
+    public void onRoomInfoChange(final TXRoomInfo txRoomInfo) {
         runOnDelegateThread(new Runnable() {
             @Override
             public void run() {
                 TRTCChatSalonDef.RoomInfo roomInfo = new TRTCChatSalonDef.RoomInfo();
-                roomInfo.roomName = tXRoomInfo.roomName;
+                roomInfo.roomName = txRoomInfo.roomName;
                 roomInfo.roomId = Integer.valueOf(mRoomId);
-                roomInfo.ownerId = tXRoomInfo.ownerId;
-                roomInfo.ownerName = tXRoomInfo.ownerName;
-                roomInfo.coverUrl = tXRoomInfo.cover;
-                roomInfo.memberCount = tXRoomInfo.memberCount;
-                roomInfo.needRequest = (tXRoomInfo.needRequest == 1);
+                roomInfo.ownerId = txRoomInfo.ownerId;
+                roomInfo.ownerName = txRoomInfo.ownerName;
+                roomInfo.coverUrl = txRoomInfo.cover;
+                roomInfo.memberCount = txRoomInfo.memberCount;
+                roomInfo.needRequest = (txRoomInfo.needRequest == 1);
                 if (mDelegate != null) {
                     mDelegate.onRoomInfoChange(roomInfo);
                 }
@@ -1088,14 +1088,15 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
                         final String userId = userInfo.userId;
                         if (userId.equals(mUserId)) {
                             //是自己上线了, 切换角色
-                            ChatSalonTRTCService.getInstance().switchToAnchor(new ChatSalonTRTCService.OnSwitchRoleListener() {
-                                @Override
-                                public void onTRTCSwitchRole(int code, String message) {
-                                    onAnchorEnterSeat(userInfo);
-                                    ChatSalonTRTCService.getInstance().muteLocalAudio(false);
-                                    muteSeat(userId, false, null);
-                                }
-                            });
+                            ChatSalonTRTCService.getInstance()
+                                    .switchToAnchor(new ChatSalonTRTCService.OnSwitchRoleListener() {
+                                        @Override
+                                        public void onTRTCSwitchRole(int code, String message) {
+                                            onAnchorEnterSeat(userInfo);
+                                            ChatSalonTRTCService.getInstance().muteLocalAudio(false);
+                                            muteSeat(userId, false, null);
+                                        }
+                                    });
                         } else {
                             onAnchorEnterSeat(userInfo);
                         }
@@ -1129,12 +1130,13 @@ public class TRTCChatSalonImpl extends TRTCChatSalon implements ITXRoomServiceDe
                         mAnchorList.remove(userId);
                         if (userInfo.userId.equals(mUserId)) {
                             //自己下线了~
-                            ChatSalonTRTCService.getInstance().switchToAudience(new ChatSalonTRTCService.OnSwitchRoleListener() {
-                                @Override
-                                public void onTRTCSwitchRole(int code, String message) {
-                                    onAnchorLeaveSeat(userInfo);
-                                }
-                            });
+                            ChatSalonTRTCService.getInstance()
+                                    .switchToAudience(new ChatSalonTRTCService.OnSwitchRoleListener() {
+                                        @Override
+                                        public void onTRTCSwitchRole(int code, String message) {
+                                            onAnchorLeaveSeat(userInfo);
+                                        }
+                                    });
                         } else {
                             onAnchorLeaveSeat(userInfo);
                         }
