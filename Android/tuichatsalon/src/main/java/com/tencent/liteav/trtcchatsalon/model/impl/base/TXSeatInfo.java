@@ -10,9 +10,9 @@ public class TXSeatInfo implements Serializable {
 
     @Override
     public String toString() {
-        return "TXSeatInfo{" +
-                ", mute=" + mute +
-                ", userInfo=" + user +
-                '}';
+        return "TXSeatInfo{"
+                + "mute=" + mute
+                + ", user='" + user + '\''
+                + '}';
     }
 }

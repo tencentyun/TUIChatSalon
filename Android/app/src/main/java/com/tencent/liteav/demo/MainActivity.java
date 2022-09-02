@@ -113,20 +113,22 @@ public class MainActivity extends AppCompatActivity {
     private void initData() {
         final UserModel userModel = UserModelManager.getInstance().getUserModel();
         mTRTCChatSalon = TRTCChatSalon.sharedInstance(this);
-        mTRTCChatSalon.login(GenerateTestUserSig.SDKAPPID, userModel.userId, userModel.userSig, new TRTCChatSalonCallback.ActionCallback() {
-            @Override
-            public void onCallback(int code, String msg) {
-                Log.d(TAG, "code: " + code + " msg:" + msg);
-                mTRTCChatSalon.setSelfProfile(userModel.userName, userModel.userAvatar, new TRTCChatSalonCallback.ActionCallback() {
+        mTRTCChatSalon.login(GenerateTestUserSig.SDKAPPID, userModel.userId, userModel.userSig,
+                new TRTCChatSalonCallback.ActionCallback() {
                     @Override
                     public void onCallback(int code, String msg) {
-                        if (code == 0) {
-                            Log.d(TAG, "setSelfProfile success");
-                        }
+                        Log.d(TAG, "code: " + code + " msg:" + msg);
+                        mTRTCChatSalon.setSelfProfile(userModel.userName, userModel.userAvatar,
+                                new TRTCChatSalonCallback.ActionCallback() {
+                                    @Override
+                                    public void onCallback(int code, String msg) {
+                                        if (code == 0) {
+                                            Log.d(TAG, "setSelfProfile success");
+                                        }
+                                    }
+                                });
                     }
                 });
-            }
-        });
     }
 
     private void createRoom() {

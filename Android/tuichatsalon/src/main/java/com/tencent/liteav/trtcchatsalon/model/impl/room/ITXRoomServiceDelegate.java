@@ -13,7 +13,7 @@ public interface ITXRoomServiceDelegate {
 
     void onRoomRecvRoomCustomMsg(String roomId, String cmd, String message, TXUserInfo userInfo);
 
-    void onRoomInfoChange(TXRoomInfo TXRoomInfo);
+    void onRoomInfoChange(TXRoomInfo txRoomInfo);
 
     void onRoomAudienceEnter(TXUserInfo userInfo);
 

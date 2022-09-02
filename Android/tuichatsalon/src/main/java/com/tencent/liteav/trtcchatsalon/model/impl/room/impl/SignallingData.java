@@ -1,11 +1,13 @@
 package com.tencent.liteav.trtcchatsalon.model.impl.room.impl;
 
+import com.google.gson.annotations.SerializedName;
+
 public class SignallingData {
 
-    private int version;
-    private String businessID;
-    private String platform;
-    private String extInfo;
+    private int      version;
+    private String   businessID;
+    private String   platform;
+    private String   extInfo;
     private DataInfo data;
 
     public int getVersion() {
@@ -49,16 +51,22 @@ public class SignallingData {
     }
 
     public static class DataInfo {
-        private int room_id;
+
+        @SerializedName("room_id")
+        private int roomId;
+
+        @SerializedName("cmd")
         private String cmd;
-        private String user_id;
+
+        @SerializedName("user_id")
+        private String userId;
 
         public int getRoomID() {
-            return room_id;
+            return roomId;
         }
 
         public void setRoomID(int roomID) {
-            this.room_id = roomID;
+            this.roomId = roomID;
         }
 
         public String getCmd() {
@@ -70,11 +78,11 @@ public class SignallingData {
         }
 
         public String getUserId() {
-            return user_id;
+            return userId;
         }
 
         public void setUserId(String userId) {
-            this.user_id = userId;
+            this.userId = userId;
         }
     }
 }

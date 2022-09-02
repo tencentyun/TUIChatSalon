@@ -1,7 +1,9 @@
 package com.tencent.liteav.trtcchatsalon.ui.widget;
 
 import android.content.Context;
+
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
@@ -42,10 +44,13 @@ public class CommonBottomDialog extends BottomSheetDialog {
         mOnButtonClickListener = buttonClickListener;
         mViewContainer.removeAllViews();
         for (int i = 0; i < mButtonSize; i++) {
-            TextView                  textView = createButton(i, textList[i]);
-            LinearLayout.LayoutParams lp       = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-            lp.setMargins(dp2px(getContext(), 10), dp2px(getContext(), 15), dp2px(getContext(), 10), dp2px(getContext(), 15));
-            textView.setPadding(dp2px(getContext(), 5), dp2px(getContext(), 10), dp2px(getContext(), 5), dp2px(getContext(), 10));
+            TextView textView = createButton(i, textList[i]);
+            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
+            lp.setMargins(dp2px(getContext(), 10), dp2px(getContext(), 15),
+                    dp2px(getContext(), 10), dp2px(getContext(), 15));
+            textView.setPadding(dp2px(getContext(), 5), dp2px(getContext(), 10),
+                    dp2px(getContext(), 5), dp2px(getContext(), 10));
             textView.setLayoutParams(lp);
             textView.setGravity(Gravity.CENTER);
             mViewContainer.addView(textView);

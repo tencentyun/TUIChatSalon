@@ -164,7 +164,8 @@ public class TXRoomService extends V2TIMSDKListener {
         if (isEnterRoom()) {
             TRTCLogger.e(TAG, "start logout fail, you are in room:" + mRoomId + ", please exit room before logout.");
             if (callback != null) {
-                callback.onCallback(CODE_ERROR, "start logout fail, you are in room:" + mRoomId + ", please exit room before logout.");
+                callback.onCallback(CODE_ERROR,
+                        "start logout fail, you are in room:" + mRoomId + ", please exit room before logout.");
             }
             return;
         }
@@ -221,7 +222,8 @@ public class TXRoomService extends V2TIMSDKListener {
         });
     }
 
-    public void createRoom(final String roomId, final String roomName, final String coverUrl, boolean needRequest, final TXCallback callback) {
+    public void createRoom(final String roomId, final String roomName,
+                           final String coverUrl, boolean needRequest, final TXCallback callback) {
         if (!isLogin()) {
             TRTCLogger.e(TAG, "im not login yet, create room fail.");
             if (callback != null) {
@@ -320,24 +322,25 @@ public class TXRoomService extends V2TIMSDKListener {
         // 创建房间成功
         initIMListener();
 //        // 创建房间需要初始化座位
-        V2TIMManager.getGroupManager().initGroupAttributes(mRoomId, IMProtocol.getInitRoomMap(mTXRoomInfo), new V2TIMCallback() {
-            @Override
-            public void onError(int i, String s) {
-                TRTCLogger.i(TAG, "init room info and seat failed. code:" + i);
-                if (callback != null) {
-                    callback.onCallback(i, s);
-                }
-            }
+        V2TIMManager.getGroupManager().initGroupAttributes(mRoomId,
+                IMProtocol.getInitRoomMap(mTXRoomInfo), new V2TIMCallback() {
+                    @Override
+                    public void onError(int i, String s) {
+                        TRTCLogger.i(TAG, "init room info and seat failed. code:" + i);
+                        if (callback != null) {
+                            callback.onCallback(i, s);
+                        }
+                    }
 
-            @Override
-            public void onSuccess() {
-                mIsEnterRoom = true;
-                TRTCLogger.i(TAG, "create room success.");
-                if (callback != null) {
-                    callback.onCallback(0, "init room info and seat success");
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess() {
+                        mIsEnterRoom = true;
+                        TRTCLogger.i(TAG, "create room success.");
+                        if (callback != null) {
+                            callback.onCallback(0, "init room info and seat success");
+                        }
+                    }
+                });
     }
 
     public void destroyRoom(final TXCallback callback) {
@@ -394,40 +397,42 @@ public class TXRoomService extends V2TIMSDKListener {
 
             @Override
             public void onSuccess() {
-                V2TIMManager.getGroupManager().getGroupAttributes(roomId, null, new V2TIMValueCallback<Map<String, String>>() {
-                    @Override
-                    public void onError(int i, String s) {
-                        TRTCLogger.e(TAG, "get group attrs error, enter room fail. code:" + i + " msg:" + s);
-                        if (callback != null) {
-                            callback.onCallback(-1, "get group attrs error, enter room fail. code:" + i + " msg:" + s);
-                        }
-                    }
-
-                    @Override
-                    public void onSuccess(Map<String, String> attrMap) {
-                        initIMListener();
-                        //开始解析room info
-                        mTXRoomInfo = IMProtocol.getRoomInfoFromAttr(attrMap);
-                        if (mTXRoomInfo == null) {
-                            TRTCLogger.e(TAG, "group room info is empty, enter room fail.");
-                            if (callback != null) {
-                                callback.onCallback(-1, "group room info is empty, enter room fail.");
+                V2TIMManager.getGroupManager().getGroupAttributes(roomId, null,
+                        new V2TIMValueCallback<Map<String, String>>() {
+                            @Override
+                            public void onError(int i, String s) {
+                                TRTCLogger.e(TAG, "get group attrs error, enter room fail. code:" + i + " msg:" + s);
+                                if (callback != null) {
+                                    callback.onCallback(-1,
+                                            "get group attrs error, enter room fail. code:" + i + " msg:" + s);
+                                }
                             }
-                            return;
-                        }
-                        mTXRoomInfo.roomId = roomId;
-                        TRTCLogger.i(TAG, "enter room success: " + mRoomId);
-                        mIsEnterRoom = true;
-                        mOwnerUserId = mTXRoomInfo.ownerId;
-                        // 回调给上层
-                        if (mDelegate != null) {
-                            mDelegate.onRoomInfoChange(mTXRoomInfo);
-                        }
-                        if (callback != null) {
-                            callback.onCallback(0, "enter room success.");
-                        }
-                    }
-                });
+
+                            @Override
+                            public void onSuccess(Map<String, String> attrMap) {
+                                initIMListener();
+                                //开始解析room info
+                                mTXRoomInfo = IMProtocol.getRoomInfoFromAttr(attrMap);
+                                if (mTXRoomInfo == null) {
+                                    TRTCLogger.e(TAG, "group room info is empty, enter room fail.");
+                                    if (callback != null) {
+                                        callback.onCallback(-1, "group room info is empty, enter room fail.");
+                                    }
+                                    return;
+                                }
+                                mTXRoomInfo.roomId = roomId;
+                                TRTCLogger.i(TAG, "enter room success: " + mRoomId);
+                                mIsEnterRoom = true;
+                                mOwnerUserId = mTXRoomInfo.ownerId;
+                                // 回调给上层
+                                if (mDelegate != null) {
+                                    mDelegate.onRoomInfoChange(mTXRoomInfo);
+                                }
+                                if (callback != null) {
+                                    callback.onCallback(0, "enter room success.");
+                                }
+                            }
+                        });
             }
         });
     }
@@ -465,14 +470,16 @@ public class TXRoomService extends V2TIMSDKListener {
         if (!isEnterRoom()) {
             TRTCLogger.e(TAG, "get user info list fail, not enter room yet.");
             if (callback != null) {
-                callback.onCallback(CODE_ERROR, "get user info list fail, not enter room yet.", new ArrayList<TXUserInfo>());
+                callback.onCallback(CODE_ERROR,
+                        "get user info list fail, not enter room yet.", new ArrayList<TXUserInfo>());
             }
             return;
         }
         if (userList == null || userList.size() == 0) {
             TRTCLogger.e(TAG, "get user info list fail, user list is empty.");
             if (callback != null) {
-                callback.onCallback(CODE_ERROR, "get user info list fail, user list is empty.", new ArrayList<TXUserInfo>());
+                callback.onCallback(CODE_ERROR,
+                        "get user info list fail, user list is empty.", new ArrayList<TXUserInfo>());
             }
             return;
         }
@@ -514,22 +521,23 @@ public class TXRoomService extends V2TIMSDKListener {
             return;
         }
 
-        V2TIMManager.getInstance().sendGroupTextMessage(msg, mRoomId, V2TIMMessage.V2TIM_PRIORITY_NORMAL, new V2TIMValueCallback<V2TIMMessage>() {
-            @Override
-            public void onError(int i, String s) {
-                TRTCLogger.e(TAG, "sendGroupTextMessage error " + i + " msg:" + msg);
-                if (callback != null) {
-                    callback.onCallback(i, s);
-                }
-            }
+        V2TIMManager.getInstance().sendGroupTextMessage(msg, mRoomId,
+                V2TIMMessage.V2TIM_PRIORITY_NORMAL, new V2TIMValueCallback<V2TIMMessage>() {
+                    @Override
+                    public void onError(int i, String s) {
+                        TRTCLogger.e(TAG, "sendGroupTextMessage error " + i + " msg:" + msg);
+                        if (callback != null) {
+                            callback.onCallback(i, s);
+                        }
+                    }
 
-            @Override
-            public void onSuccess(V2TIMMessage v2TIMMessage) {
-                if (callback != null) {
-                    callback.onCallback(0, "send group message success.");
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess(V2TIMMessage v2TIMMessage) {
+                        if (callback != null) {
+                            callback.onCallback(0, "send group message success.");
+                        }
+                    }
+                });
 
     }
 
@@ -580,41 +588,43 @@ public class TXRoomService extends V2TIMSDKListener {
     }
 
     public void sendGroupMsg(String data, final TXCallback callback) {
-        V2TIMManager.getInstance().sendGroupCustomMessage(data.getBytes(), mRoomId, V2TIMMessage.V2TIM_PRIORITY_NORMAL, new V2TIMValueCallback<V2TIMMessage>() {
-            @Override
-            public void onError(int i, String s) {
-                TRTCLogger.e(TAG, "sendGroupMsg error " + i + " msg:" + s);
-                if (callback != null) {
-                    callback.onCallback(i, s);
-                }
-            }
+        V2TIMManager.getInstance().sendGroupCustomMessage(data.getBytes(),
+                mRoomId, V2TIMMessage.V2TIM_PRIORITY_NORMAL, new V2TIMValueCallback<V2TIMMessage>() {
+                    @Override
+                    public void onError(int i, String s) {
+                        TRTCLogger.e(TAG, "sendGroupMsg error " + i + " msg:" + s);
+                        if (callback != null) {
+                            callback.onCallback(i, s);
+                        }
+                    }
 
-            @Override
-            public void onSuccess(V2TIMMessage v2TIMMessage) {
-                if (callback != null) {
-                    callback.onCallback(0, "send group message success.");
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess(V2TIMMessage v2TIMMessage) {
+                        if (callback != null) {
+                            callback.onCallback(0, "send group message success.");
+                        }
+                    }
+                });
     }
 
     private void sendC2CMsg(String data, String userId, final TXCallback callback) {
-        V2TIMManager.getInstance().sendC2CCustomMessage(data.getBytes(), userId, new V2TIMValueCallback<V2TIMMessage>() {
-            @Override
-            public void onError(int i, String s) {
-                TRTCLogger.e(TAG, "sendC2CMsg error " + i + " msg:" + s);
-                if (callback != null) {
-                    callback.onCallback(i, s);
-                }
-            }
+        V2TIMManager.getInstance().sendC2CCustomMessage(data.getBytes(),
+                userId, new V2TIMValueCallback<V2TIMMessage>() {
+                    @Override
+                    public void onError(int i, String s) {
+                        TRTCLogger.e(TAG, "sendC2CMsg error " + i + " msg:" + s);
+                        if (callback != null) {
+                            callback.onCallback(i, s);
+                        }
+                    }
 
-            @Override
-            public void onSuccess(V2TIMMessage v2TIMMessage) {
-                if (callback != null) {
-                    callback.onCallback(0, "send c2c message success.");
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess(V2TIMMessage v2TIMMessage) {
+                        if (callback != null) {
+                            callback.onCallback(0, "send c2c message success.");
+                        }
+                    }
+                });
     }
 
     public boolean isLogin() {
@@ -714,23 +724,24 @@ public class TXRoomService extends V2TIMSDKListener {
         dataInfo.setRoomID(roomId);
         String json = new Gson().toJson(signallingData);
         TRTCLogger.i(TAG, "send " + userId + " json:" + json);
-        return V2TIMManager.getSignalingManager().invite(userId, json, true, null, MAX_INVITATION_TIME_OUT, new V2TIMCallback() {
-            @Override
-            public void onError(int i, String s) {
-                TRTCLogger.e(TAG, "sendInvitation error " + i);
-                if (callback != null) {
-                    callback.onCallback(i, s);
-                }
-            }
+        return V2TIMManager.getSignalingManager().invite(userId, json, true, null,
+                MAX_INVITATION_TIME_OUT, new V2TIMCallback() {
+                    @Override
+                    public void onError(int i, String s) {
+                        TRTCLogger.e(TAG, "sendInvitation error " + i);
+                        if (callback != null) {
+                            callback.onCallback(i, s);
+                        }
+                    }
 
-            @Override
-            public void onSuccess() {
-                TRTCLogger.i(TAG, "sendInvitation success ");
-                if (callback != null) {
-                    callback.onCallback(0, "send invitation success");
-                }
-            }
-        });
+                    @Override
+                    public void onSuccess() {
+                        TRTCLogger.i(TAG, "sendInvitation success ");
+                        if (callback != null) {
+                            callback.onCallback(0, "send invitation success");
+                        }
+                    }
+                });
     }
 
     public void acceptInvitation(String id, final TXCallback callback) {
@@ -802,31 +813,33 @@ public class TXRoomService extends V2TIMSDKListener {
     }
 
     public void getAudienceList(final TXUserListCallback txUserListCallback) {
-        V2TIMManager.getGroupManager().getGroupMemberList(mRoomId, V2TIMGroupMemberFullInfo.V2TIM_GROUP_MEMBER_FILTER_COMMON, 0, new V2TIMValueCallback<V2TIMGroupMemberInfoResult>() {
-            @Override
-            public void onError(int i, String s) {
-                if (txUserListCallback != null) {
-                    txUserListCallback.onCallback(i, s, new ArrayList<TXUserInfo>());
-                }
-            }
-
-            @Override
-            public void onSuccess(V2TIMGroupMemberInfoResult v2TIMGroupMemberInfoResult) {
-                List<TXUserInfo> userInfos = new ArrayList<>();
-                if (v2TIMGroupMemberInfoResult.getMemberInfoList() != null) {
-                    for (V2TIMGroupMemberFullInfo info : v2TIMGroupMemberInfoResult.getMemberInfoList()) {
-                        TXUserInfo userInfo = new TXUserInfo();
-                        userInfo.userId = info.getUserID();
-                        userInfo.userName = info.getNickName();
-                        userInfo.avatarURL = info.getFaceUrl();
-                        userInfos.add(userInfo);
+        V2TIMManager.getGroupManager().getGroupMemberList(mRoomId,
+                V2TIMGroupMemberFullInfo.V2TIM_GROUP_MEMBER_FILTER_COMMON, 0,
+                new V2TIMValueCallback<V2TIMGroupMemberInfoResult>() {
+                    @Override
+                    public void onError(int i, String s) {
+                        if (txUserListCallback != null) {
+                            txUserListCallback.onCallback(i, s, new ArrayList<TXUserInfo>());
+                        }
                     }
-                }
-                if (txUserListCallback != null) {
-                    txUserListCallback.onCallback(0, "", userInfos);
-                }
-            }
-        });
+
+                    @Override
+                    public void onSuccess(V2TIMGroupMemberInfoResult v2TIMGroupMemberInfoResult) {
+                        List<TXUserInfo> userInfos = new ArrayList<>();
+                        if (v2TIMGroupMemberInfoResult.getMemberInfoList() != null) {
+                            for (V2TIMGroupMemberFullInfo info : v2TIMGroupMemberInfoResult.getMemberInfoList()) {
+                                TXUserInfo userInfo = new TXUserInfo();
+                                userInfo.userId = info.getUserID();
+                                userInfo.userName = info.getNickName();
+                                userInfo.avatarURL = info.getFaceUrl();
+                                userInfos.add(userInfo);
+                            }
+                        }
+                        if (txUserListCallback != null) {
+                            txUserListCallback.onCallback(0, "", userInfos);
+                        }
+                    }
+                });
     }
 
     public void getRoomInfoList(final List<String> roomIds, final TXRoomInfoListCallback callback) {
@@ -893,7 +906,8 @@ public class TXRoomService extends V2TIMSDKListener {
         }
 
         @Override
-        public void onRecvGroupCustomMessage(String msgID, String groupID, V2TIMGroupMemberInfo sender, byte[] customData) {
+        public void onRecvGroupCustomMessage(String msgID, String groupID,
+                                             V2TIMGroupMemberInfo sender, byte[] customData) {
             if (!groupID.equals(mRoomId)) {
                 return;
             }
@@ -913,11 +927,11 @@ public class TXRoomService extends V2TIMSDKListener {
                             // ignore
                             break;
                         case IMProtocol.Define.CODE_ROOM_CUSTOM_MSG:
-                            Pair<String, String> cusPair = IMProtocol.parseCusMsg(jsonObject);
                             TXUserInfo userInfo = new TXUserInfo();
                             userInfo.userId = sender.getUserID();
                             userInfo.avatarURL = sender.getFaceUrl();
                             userInfo.userName = sender.getNickName();
+                            Pair<String, String> cusPair = IMProtocol.parseCusMsg(jsonObject);
                             if (mDelegate != null && cusPair != null) {
                                 mDelegate.onRoomRecvRoomCustomMsg(mRoomId, cusPair.first, cusPair.second, userInfo);
                             }
@@ -1015,7 +1029,8 @@ public class TXRoomService extends V2TIMSDKListener {
 
     private class VoiceRoomSignalListener extends V2TIMSignalingListener {
         @Override
-        public void onReceiveNewInvitation(String inviteID, String inviter, String groupId, List<String> inviteeList, String data) {
+        public void onReceiveNewInvitation(String inviteID, String inviter, String groupId,
+                                           List<String> inviteeList, String data) {
             TRTCLogger.i(TAG, "recv new invitation: " + inviteID + " from " + inviter + " data:" + data);
             if (mDelegate != null) {
                 SignallingData signallingData = IMProtocol.convert2SignallingData(data);

@@ -43,12 +43,12 @@ public class IMProtocol {
     }
 
     public static class SignallingDefine {
-        public static String  KEY_VERSION     = "version";
-        public static String  KEY_BUSINESS_ID = "businessID";
-        public static String  KEY_DATA        = "data";
-        public static String  KEY_ROOM_ID     = "room_id";
-        public static String  KEY_CMD         = "cmd";
-        public static String  KEY_USER_ID     = "user_id";
+        public static String KEY_VERSION     = "version";
+        public static String KEY_BUSINESS_ID = "businessID";
+        public static String KEY_DATA        = "data";
+        public static String KEY_ROOM_ID     = "room_id";
+        public static String KEY_CMD         = "cmd";
+        public static String KEY_USER_ID     = "user_id";
 
         public static final int    VALUE_VERSION       = 1;
         public static final String VALUE_BUSINESS_ID   = "ChatSalon"; //语音沙龙场景
@@ -57,28 +57,28 @@ public class IMProtocol {
         public static final String VALUE_CMD_PICK_USER = "pickUser";  //抱人上麦
     }
 
-    public static HashMap<String, String> getInitRoomMap(TXRoomInfo TXRoomInfo) {
-        Gson                    gson    = new Gson();
+    public static HashMap<String, String> getInitRoomMap(TXRoomInfo txRoomInfo) {
+        Gson gson = new Gson();
         HashMap<String, String> jsonMap = new HashMap<>();
         jsonMap.put(KEY_ATTR_VERSION, VALUE_ATTR_VERSION);
-        jsonMap.put(KEY_ROOM_INFO, gson.toJson(TXRoomInfo));
+        jsonMap.put(KEY_ROOM_INFO, gson.toJson(txRoomInfo));
         return jsonMap;
     }
 
     public static TXRoomInfo getRoomInfoFromAttr(Map<String, String> map) {
-        TXRoomInfo TXRoomInfo;
-        Gson       gson = new Gson();
-        String     json = map.get(KEY_ROOM_INFO);
+        TXRoomInfo txRoomInfo;
+        Gson gson = new Gson();
+        String json = map.get(KEY_ROOM_INFO);
         if (TextUtils.isEmpty(json)) {
             return null;
         }
         try {
-            TXRoomInfo = gson.fromJson(json, TXRoomInfo.class);
+            txRoomInfo = gson.fromJson(json, TXRoomInfo.class);
         } catch (Exception e) {
             TRTCLogger.e(TAG, "parse room info json error! " + json);
-            TXRoomInfo = null;
+            txRoomInfo = null;
         }
-        return TXRoomInfo;
+        return txRoomInfo;
     }
 
     public static SignallingData convert2SignallingData(String json) {
@@ -130,7 +130,7 @@ public class IMProtocol {
             if (dataMap.containsKey(SignallingDefine.KEY_CMD)) {
                 Object cmd = dataMap.get(SignallingDefine.KEY_CMD);
                 if (cmd instanceof String) {
-                    dataInfo.setCmd((String)cmd);
+                    dataInfo.setCmd((String) cmd);
                 } else {
                     TRTCLogger.e(TAG, "cmd is not string, value is :" + cmd);
                 }
@@ -182,7 +182,7 @@ public class IMProtocol {
     }
 
     public static Pair<String, String> parseCusMsg(JSONObject jsonObject) {
-        String cmd     = jsonObject.optString("command");
+        String cmd = jsonObject.optString("command");
         String message = jsonObject.optString("message");
         return new Pair<>(cmd, message);
     }

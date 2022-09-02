@@ -13,10 +13,10 @@ public class TRTCChatSalonDef {
 
         @Override
         public String toString() {
-            return "TXSeatInfo{" +
-                    ", mute=" + mute +
-                    ", userId=" + userId +
-                    '}';
+            return "SeatInfo{"
+                    + "mute=" + mute
+                    + ", userId='" + userId + '\''
+                    + '}';
         }
     }
 
@@ -33,12 +33,12 @@ public class TRTCChatSalonDef {
 
         @Override
         public String toString() {
-            return "RoomParam{" +
-                    "roomName='" + roomName + '\'' +
-                    ", coverUrl='" + coverUrl + '\'' +
-                    ", needRequest=" + needRequest +
-                    ", seatInfoList=" + seatInfoList +
-                    '}';
+            return "RoomParam{"
+                    + "roomName='" + roomName + '\''
+                    + ", coverUrl='" + coverUrl + '\''
+                    + ", needRequest=" + needRequest
+                    + ", seatInfoList=" + seatInfoList
+                    + '}';
         }
     }
 
@@ -52,11 +52,11 @@ public class TRTCChatSalonDef {
 
         @Override
         public String toString() {
-            return "UserInfo{" +
-                    "userId='" + userId + '\'' +
-                    ", userName='" + userName + '\'' +
-                    ", userAvatar='" + userAvatar + '\'' +
-                    '}';
+            return "UserInfo{"
+                    + "userId='" + userId + '\''
+                    + ", userName='" + userName + '\''
+                    + ", userAvatar='" + userAvatar + '\''
+                    + '}';
         }
     }
 
@@ -78,14 +78,15 @@ public class TRTCChatSalonDef {
 
         @Override
         public String toString() {
-            return "TXRoomInfo{" +
-                    "roomId=" + roomId +
-                    ", roomName='" + roomName + '\'' +
-                    ", coverUrl='" + coverUrl + '\'' +
-                    ", ownerId='" + ownerId + '\'' +
-                    ", ownerName='" + ownerName + '\'' +
-                    ", memberCount=" + memberCount +
-                    '}';
+            return "RoomInfo{"
+                    + "roomId=" + roomId
+                    + ", roomName='" + roomName + '\''
+                    + ", coverUrl='" + coverUrl + '\''
+                    + ", ownerId='" + ownerId + '\''
+                    + ", ownerName='" + ownerName + '\''
+                    + ", memberCount=" + memberCount
+                    + ", needRequest=" + needRequest
+                    + '}';
         }
     }
 }
