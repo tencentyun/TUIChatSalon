@@ -102,7 +102,7 @@ class TRTCChatSalonRootView: UIView {
     let leaveButton: UIButton = {
         let button = UIButton.init(frame: .zero)
         button.setTitle(.leaveText, for: .normal)
-        button.setBackgroundImage(UIColor(hex: "F4F5F9").trans2Image(), for: .normal)
+        button.setBackgroundImage(UIColor(hex: "F4F5F9")?.trans2Image(), for: .normal)
         button.setTitleColor(UIColor(hex: "FA585E"), for: .normal)
         button.layer.cornerRadius = 18
         button.layer.masksToBounds = true
