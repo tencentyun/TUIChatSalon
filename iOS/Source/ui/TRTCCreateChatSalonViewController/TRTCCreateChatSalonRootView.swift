@@ -223,11 +223,25 @@ extension TRTCCreateChatSalonRootView {
 }
 
 fileprivate extension String {
-    static let titleText = chatSalonLocalize("Demo.TRTC.Salon.createsalonroom")
-    static let topicText = chatSalonLocalize("Demo.TRTC.Salon.topic")
-    static let topicPlaceholdText = chatSalonLocalize("Demo.TRTC.Salon.defaultroomtopic")
-    static let userNameText = chatSalonLocalize("Demo.TRTC.Salon.userid")
-    static let userNamePlaceholdText = chatSalonLocalize("Demo.TRTC.Salon.defaultuserid")
-    static let startButtonText = chatSalonLocalize("Demo.TRTC.Salon.letsgo")
-    static let nameEmptyToast = chatSalonLocalize("Demo.TRTC.Salon.nicknameorusernameisempty")
+    static var titleText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.createsalonroom")
+    }
+    static var topicText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.topic")
+    }
+    static var topicPlaceholdText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.defaultroomtopic")
+    }
+    static var userNameText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.userid")
+    }
+    static var userNamePlaceholdText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.defaultuserid")
+    }
+    static var startButtonText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.letsgo")
+    }
+    static var nameEmptyToast: String {
+        chatSalonLocalize("Demo.TRTC.Salon.nicknameorusernameisempty")
+    }
 }
