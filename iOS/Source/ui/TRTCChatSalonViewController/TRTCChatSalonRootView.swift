@@ -671,23 +671,52 @@ extension TRTCChatSalonRootView: TRTCChatSalonViewResponder {
 
 /// MARK: - internationalization string
 fileprivate extension String {
-    static let anchorHeaderText = chatSalonLocalize("Demo.TRTC.Salon.anchor")
-    static let audienceHeaderText = chatSalonLocalize("Demo.TRTC.Salon.audiences")
-    static let leaveText = chatSalonLocalize("Demo.TRTC.Salon.leavequietly")
-    static let sureActionTitle = chatSalonLocalize("Demo.TRTC.LiveRoom.confirm")
-    static let cancelActionTitle = chatSalonLocalize("Demo.TRTC.LiveRoom.cancel")
-    static let acceptTitle = chatSalonLocalize("Demo.TRTC.Salon.welcome")
-    static let refuseTitle = chatSalonLocalize("Demo.TRTC.Salon.dismiss")
-    static let ownerExitMsg = chatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
-    static let seatMute = chatSalonLocalize("Demo.TRTC.Salon.seatmuted")
-    static let seatUnmute = chatSalonLocalize("Demo.TRTC.Salon.seatunmuted")
-    static let chooseTitle = chatSalonLocalize("Demo.TRTC.Salon.pleaseselect")
+    static var anchorHeaderText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.anchor")
+    }
+    static var audienceHeaderText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.audiences")
+    }
+    static var leaveText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.leavequietly")
+    }
+    static var sureActionTitle: String {
+        chatSalonLocalize("Demo.TRTC.LiveRoom.confirm")
+    }
+    static var cancelActionTitle: String {
+        chatSalonLocalize("Demo.TRTC.LiveRoom.cancel")
+    }
+    static var acceptTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.welcome")
+    }
+    static var refuseTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.dismiss")
+    }
+    static var ownerExitMsg: String {
+        chatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
+    }
+    static var seatMute: String {
+        chatSalonLocalize("Demo.TRTC.Salon.seatmuted")
+    }
+    static var seatUnmute: String {
+        chatSalonLocalize("Demo.TRTC.Salon.seatunmuted")
+    }
+    static var chooseTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.pleaseselect")
+    }
     
-    static let alertAudienceTitle = chatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
-    static let alertAudienceConfirm = chatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
-    static let alertAudienceCancel = chatSalonLocalize("Demo.TRTC.Salon.waitabit")
-    static let leaveRoomText = chatSalonLocalize("Demo.TRTC.Salon.leave")
-
+    static var alertAudienceTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
+    }
+    static var alertAudienceConfirm: String {
+        chatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
+    }
+    static var alertAudienceCancel: String {
+        chatSalonLocalize("Demo.TRTC.Salon.waitabit")
+    }
+    static var leaveRoomText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.leave")
+    }
 }
 
 fileprivate extension UIColor {

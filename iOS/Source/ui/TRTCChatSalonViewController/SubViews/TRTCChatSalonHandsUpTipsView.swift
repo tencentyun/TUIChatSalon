@@ -72,5 +72,7 @@ fileprivate extension UIColor {
 }
 
 fileprivate extension String {
-    static let successMsg = chatSalonLocalize("Demo.TRTC.Salon.raisedhandandwaitmanageraccept")
+    static var successMsg: String {
+        chatSalonLocalize("Demo.TRTC.Salon.raisedhandandwaitmanageraccept")
+    }
 }
