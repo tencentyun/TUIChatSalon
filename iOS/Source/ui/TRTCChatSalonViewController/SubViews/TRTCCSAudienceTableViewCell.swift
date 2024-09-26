@@ -128,5 +128,7 @@ class TRTCCSAudienceTableViewCell: UITableViewCell {
 }
 
 fileprivate extension String {
-    static let welcomeText = chatSalonLocalize("Demo.TRTC.Salon.welcome")
+    static var welcomeText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.welcome")
+    }
 }
