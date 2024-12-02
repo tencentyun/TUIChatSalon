@@ -157,11 +157,21 @@ extension TRTCChatSalonViewController {
 }
 
 private extension String {
-    static let controllerTitle = chatSalonLocalize("Demo.TRTC.Salon.roomid")
-    static let anchorAlertTitle = chatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
-    static let audienceAlertTitle = chatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
-    static let alertConfirm = chatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
-    static let alertCancel = chatSalonLocalize("Demo.TRTC.Salon.waitabit")
+    static var controllerTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.roomid")
+    }
+    static var anchorAlertTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.wanttoendroom")
+    }
+    static var audienceAlertTitle: String {
+        chatSalonLocalize("Demo.TRTC.Salon.surewanttoleaveroom")
+    }
+    static var alertConfirm: String {
+        chatSalonLocalize("Demo.TRTC.Salon.audienceconfirm")
+    }
+    static var alertCancel: String {
+        chatSalonLocalize("Demo.TRTC.Salon.waitabit")
+    }
 }
 
 

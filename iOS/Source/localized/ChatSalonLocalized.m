@@ -6,6 +6,7 @@
 //  Copyright © 2022 Tencent. All rights reserved.
 
 #import "ChatSalonLocalized.h"
+#import "TUICore/TUIGlobalization.h"
 
 #pragma mark - Base
 NSBundle *chatSalonBundle(void) {
@@ -14,7 +15,9 @@ NSBundle *chatSalonBundle(void) {
 }
 
 NSString *tcsLocalizeFromTable(NSString *key, NSString *table) {
-    return [chatSalonBundle() localizedStringForKey:key value:@"" table:table];
+    NSString *bundlePath = [chatSalonBundle() pathForResource:[TUIGlobalization tk_localizableLanguageKey] ?: @"" ofType:@"lproj"];
+    NSBundle *bundle = [NSBundle bundleWithPath:bundlePath];
+    return [bundle localizedStringForKey:key value:@"" table:table];
 }
 
 NSString *tcsLocalizeFromTableAndCommon(NSString *key, NSString *common, NSString *table) {
