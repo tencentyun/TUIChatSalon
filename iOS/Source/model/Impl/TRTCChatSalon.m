@@ -367,6 +367,7 @@ static dispatch_once_t gOnceToken;
             }
         }];
         [self clearList];
+        [TRTCCloud destroySharedIntance];
     }];
 }
 
@@ -429,6 +430,7 @@ static dispatch_once_t gOnceToken;
         } else {
             [self exitRoomInternal:callback];
         }
+        [TRTCCloud destroySharedIntance];
     }];
 }
 

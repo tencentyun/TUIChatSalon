@@ -743,28 +743,76 @@ extension TRTCChatSalonViewModel: TRTCChatSalonDelegate {
 }
 
 fileprivate extension String {
-    static let closedMicText = chatSalonLocalize("Demo.TRTC.Salon.micmuted")
-    static let openedMicText = chatSalonLocalize("Demo.TRTC.Salon.micunmuted")
-    static let micInitNotReadyText = chatSalonLocalize("Demo.TRTC.Salon.seatlistnotinit")
-    static let enterRoomSuccText = chatSalonLocalize("Demo.TRTC.Salon.enterroomsuccess")
-    static let enterRoomFailText = chatSalonLocalize("Demo.TRTC.Salon.enterroomfailed")
-    static let createRoomFailedText = chatSalonLocalize("Demo.TRTC.LiveRoom.createroomfailed")
-    static let alreadyIsAnchorText = chatSalonLocalize("Demo.TRTC.Salon.isbeingarchon")
-    static let roomNotReadyText = chatSalonLocalize("Demo.TRTC.Salon.roomnotready")
-    static let waitHostAcceptText = chatSalonLocalize("Demo.TRTC.Salon.waitinghostconsent")
-    static let takeSeatSendFailed = chatSalonLocalize("Demo.TRTC.Salon.failedsenthandupmessage")
-    static let masterOnSeatSuccess = chatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatsuccess")
-    static let masterOnSeatFailed = chatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatfailed")
-    static let onlyAnchorUse = chatSalonLocalize("Demo.TRTC.LiveRoom.onlyanchorcanoperation")
-    static let kickOutMicText = chatSalonLocalize("Demo.TRTC.Salon.movetotheaudience")
-    static let inviatttionTimeoutText = chatSalonLocalize("Demo.TRTC.Salon.reqisexpired")
-    static let acceptInvitationFailed = chatSalonLocalize("Demo.TRTC.Salon.acceptreqfailed")
-    static let leaveSeatSuccText = chatSalonLocalize("Demo.TRTC.Salon.audiencesuccess")
-    static let leaveSeatFailedText = chatSalonLocalize("Demo.TRTC.Salon.failedaudience")
-    static let hostDestroyRoomText = chatSalonLocalize("Demo.TRTC.Salon.archonclosedroom")
-    static let enterSeatText = chatSalonLocalize("Demo.TRTC.Salon.handsup")
-    static let leaveSeatText = chatSalonLocalize("Demo.TRTC.Salon.audience")
-    static let enterSeatSuccessText = chatSalonLocalize("Demo.TRTC.Salon.successbecomespaker")
-    static let enterSeatFailedText = chatSalonLocalize("Demo.TRTC.Salon.failedbecomespaker")
-    static let inviteLimitedText = chatSalonLocalize("Demo.TRTC.Salon.invitelimited")
+    static var closedMicText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.micmuted")
+    }
+    static var openedMicText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.micunmuted")
+    }
+    static var micInitNotReadyText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.seatlistnotinit")
+    }
+    static var enterRoomSuccText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.enterroomsuccess")
+    }
+    static var enterRoomFailText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.enterroomfailed")
+    }
+    static var createRoomFailedText: String {
+        chatSalonLocalize("Demo.TRTC.LiveRoom.createroomfailed")
+    }
+    static var alreadyIsAnchorText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.isbeingarchon")
+    }
+    static var roomNotReadyText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.roomnotready")
+    }
+    static var waitHostAcceptText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.waitinghostconsent")
+    }
+    static var takeSeatSendFailed: String {
+        chatSalonLocalize("Demo.TRTC.Salon.failedsenthandupmessage")
+    }
+    static var masterOnSeatSuccess: String {
+        chatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatsuccess")
+    }
+    static var masterOnSeatFailed: String {
+        chatSalonLocalize("Demo.TRTC.Salon.hostoccupyseatfailed")
+    }
+    static var onlyAnchorUse: String {
+        chatSalonLocalize("Demo.TRTC.LiveRoom.onlyanchorcanoperation")
+    }
+    static var kickOutMicText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.movetotheaudience")
+    }
+    static var inviatttionTimeoutText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.reqisexpired")
+    }
+    static var acceptInvitationFailed: String {
+        chatSalonLocalize("Demo.TRTC.Salon.acceptreqfailed")
+    }
+    static var leaveSeatSuccText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.audiencesuccess")
+    }
+    static var leaveSeatFailedText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.failedaudience")
+    }
+    static var hostDestroyRoomText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.archonclosedroom")
+    }
+    static var enterSeatText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.handsup")
+    }
+    static var leaveSeatText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.audience")
+    }
+    static var enterSeatSuccessText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.successbecomespaker")
+    }
+    static var enterSeatFailedText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.failedbecomespaker")
+    }
+    static var inviteLimitedText: String {
+        chatSalonLocalize("Demo.TRTC.Salon.invitelimited")
+    }
 }
