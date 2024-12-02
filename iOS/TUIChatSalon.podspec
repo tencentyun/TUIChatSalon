@@ -18,7 +18,6 @@ Pod::Spec.new do |spec|
   spec.dependency 'Toast-Swift'
   spec.dependency 'Kingfisher', '<= 6.3.1'
   spec.dependency 'TXAppBasic'
-  spec.dependency 'TXIMSDK_Plus_iOS', '>= 5.7.1435'
   spec.dependency 'TUICore'
   
   spec.requires_arc = true
